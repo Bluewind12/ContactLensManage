@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import momonyan.contactlensmanage.R
 
-class Tab1 : Fragment() {
+class Tab1Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var view = inflater.inflate(R.layout.tab1_layout, container, false)
         return view
