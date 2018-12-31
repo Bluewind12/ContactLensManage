@@ -27,5 +27,8 @@
 
     <string name="box_info">残り</string>
 
+    <string name="times">通知時刻</string>
+    <string name="funs">通知</string>
+
 
 </resources>
