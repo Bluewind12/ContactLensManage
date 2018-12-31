@@ -3,7 +3,7 @@
     <string name="contact_num">あとn日</string>
     <string name="contact_R_setting">R 設定</string>
     <string name="contact_L_setting">L 設定</string>
-    <string name="contact_LR_setting">LR 設定</string>
+    <string name="contact_LR_setting">LR 同時設定</string>
     <string name="not_setting">未設定</string>
     <string name="set_time">　月　日にセット</string>
     <string name="limit_time">　月　日まで</string>
