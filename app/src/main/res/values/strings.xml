@@ -3,10 +3,29 @@
     <string name="contact_num">あとn日</string>
     <string name="contact_R_setting">R 設定</string>
     <string name="contact_L_setting">L 設定</string>
-    <string name="contact_LR_setting">LR 同時設定</string>
+    <string name="contact_LR_setting">期限設定</string>
     <string name="not_setting">未設定</string>
     <string name="set_time">　月　日にセット</string>
     <string name="limit_time">　月　日まで</string>
 
-    <string name="xxx">xxx</string>
+    <!-- Tab -->
+    <string name="tab1">基本画面</string>
+    <string name="tab2">詳細画面</string>
+
+    <!-- 詳細画面 -->
+    <string name="now_info">今使用中の情報</string>
+    <string name="now_time1">何日まで？</string>
+    <string name="now_time2">月　日まで</string>
+    <string name="now_time3">あと　日</string>
+
+    <string name="contact_info">コンタクトレンズ情報</string>
+    <string name="contact_maker">メーカー</string>
+    <string name="contact_type">タイプ</string>
+    <string name="contact_day">デイ</string>
+    <string name="contact_lens">度数</string>
+    <string name="contact_other">その他・メモ</string>
+
+    <string name="box_info">残り</string>
+
+
 </resources>

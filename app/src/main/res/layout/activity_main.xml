@@ -23,14 +23,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:icon="@drawable/time_drawable_select"
-                android:text="aaa"/>
+                android:text="@string/tab1"/>
 
         <android.support.design.widget.TabItem
                 android:id="@+id/tabItem2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:icon="@drawable/gear_drawable_select"
-                android:text="aaa"/>
+                android:icon="@drawable/more_drawable_select"
+                android:text="@string/tab2"/>
 
     </android.support.design.widget.TabLayout>
 
@@ -42,18 +42,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="16dp"
-            app:backgroundTint="@color/colorPrimaryDark"
-            app:fabSize="normal"
-            app:layout_constraintBottom_toBottomOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_set_as"/>
 
 </android.support.constraint.ConstraintLayout>
