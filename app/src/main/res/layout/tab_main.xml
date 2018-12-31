@@ -16,13 +16,13 @@
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginRight="8dp"
             app:layout_constraintHorizontal_bias="0.501" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/button3"/>
+            app:layout_constraintBottom_toTopOf="@+id/timeSetButton"/>
     <Button
             android:text="@string/contact_LR_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/button3"
+            android:id="@+id/timeSetButton"
             android:layout_marginBottom="76dp" app:layout_constraintBottom_toBottomOf="parent"
     />
     <TextView
