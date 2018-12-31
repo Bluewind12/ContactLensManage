@@ -26,12 +26,6 @@ open class TabActivity : AppCompatActivity() {
         val moreInfo = this.layoutInflater.inflate(R.layout.tab_more, null)
 
         sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE)
-
-        moreInfo.makerText.text = sharedPreferences.getString("maker", getString(R.string.not_setting))
-        moreInfo.lensText.text = sharedPreferences.getString("lens", getString(R.string.not_setting))
-        moreInfo.typeText.text = sharedPreferences.getString("type", getString(R.string.not_setting))
-        moreInfo.otherText.text = sharedPreferences.getString("other", getString(R.string.not_setting))
-
         mSectionsPagerAdapter = TabAdapter(supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
