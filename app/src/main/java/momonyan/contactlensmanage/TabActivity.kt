@@ -14,6 +14,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
+import kotlinx.android.synthetic.main.tab_main.view.*
 import kotlinx.android.synthetic.main.tab_more.*
 
 
@@ -118,13 +119,18 @@ open class TabActivity : AppCompatActivity() {
                 limitDay1.visibility = View.VISIBLE
                 setTimeTextR.visibility = View.VISIBLE
                 imageView.setImageResource(R.drawable.l_icon)
+                timeSetButton.visibility = View.GONE
+                lSettingButton.visibility = View.VISIBLE
+                rSettingButton.visibility = View.VISIBLE
             } else {
                 imageView3.setImageResource(R.drawable.lr_icon)
                 cardView2_2.visibility = View.GONE
                 limitDay1.visibility = View.GONE
                 setTimeTextR.visibility = View.GONE
                 imageView.setImageResource(R.drawable.lr_icon)
-
+                timeSetButton.visibility = View.VISIBLE
+                lSettingButton.visibility = View.GONE
+                rSettingButton.visibility = View.GONE
             }
 
             edit.putInt("stock", layout.stockIn.text.toString().toInt())
