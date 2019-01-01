@@ -44,5 +44,7 @@
     <string name="funs">通知</string>
 
     <string name="r_view">Rのみ</string>
+    <string name="r_set">R期限設定</string>
+    <string name="l_set">L期限設定</string>
 
 </resources>

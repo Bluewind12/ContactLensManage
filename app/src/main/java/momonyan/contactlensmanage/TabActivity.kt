@@ -13,8 +13,8 @@ import android.widget.EditText
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
+import kotlinx.android.synthetic.main.tab_main.*
 import kotlinx.android.synthetic.main.tab_more.*
-import kotlinx.android.synthetic.main.tab_more.view.*
 
 
 open class TabActivity : AppCompatActivity() {
@@ -115,9 +115,16 @@ open class TabActivity : AppCompatActivity() {
             if (layout.toggleButton.isChecked) {
                 imageView3.setImageResource(R.drawable.l_icon)
                 cardView2_2.visibility = View.VISIBLE
+                limitDay1.visibility = View.VISIBLE
+                setTimeTextR.visibility = View.VISIBLE
+                imageView.setImageResource(R.drawable.l_icon)
             } else {
                 imageView3.setImageResource(R.drawable.lr_icon)
                 cardView2_2.visibility = View.GONE
+                limitDay1.visibility = View.GONE
+                setTimeTextR.visibility = View.GONE
+                imageView.setImageResource(R.drawable.lr_icon)
+
             }
 
             edit.putInt("stock", layout.stockIn.text.toString().toInt())

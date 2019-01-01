@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
+            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
             android:layout_height="match_parent"
 >
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                         app:layout_constraintVertical_bias="0.278"/>
                 <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="0dp" app:srcCompat="@drawable/gear_color"
+                        android:layout_height="0dp" app:srcCompat="@drawable/l_icon"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/imageView"
                         app:layout_constraintStart_toEndOf="@+id/manyText" app:layout_constraintVertical_bias="1.0"
@@ -62,8 +62,8 @@
                 android:layout_height="wrap_content" android:id="@+id/limitDay1"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/limitDay"
-                app:cardUseCompatPadding="true" android:layout_marginTop="16dp">
+                app:layout_constraintTop_toBottomOf="@+id/setTimeTextR"
+                app:cardUseCompatPadding="true" android:layout_marginTop="8dp">
 
             <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                          android:layout_height="wrap_content">
@@ -71,7 +71,7 @@
                         android:text="@string/limit_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/minuteTimeTextL"
+                        android:id="@+id/minuteTimeTextR"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="24dp" android:textSize="24sp" android:layout_marginTop="8dp"
                         app:layout_constraintTop_toTopOf="parent"/>
@@ -79,20 +79,20 @@
                         android:text="@string/limit_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/manyTextL"
-                        app:layout_constraintStart_toStartOf="@+id/minuteTimeTextL"
+                        android:id="@+id/manyTextR"
+                        app:layout_constraintStart_toStartOf="@+id/minuteTimeTextR"
                         android:textSize="36sp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeTextL" android:layout_marginStart="24dp"
+                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeTextR" android:layout_marginStart="24dp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
                 <ImageView
                         android:layout_width="0dp"
-                        android:layout_height="0dp" app:srcCompat="@drawable/gear_color"
+                        android:layout_height="0dp" app:srcCompat="@drawable/r_icon"
                         android:id="@+id/imageView2"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="16dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/manyTextL"
+                        app:layout_constraintStart_toEndOf="@+id/manyTextR"
                         android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="16dp"/>
             </android.support.constraint.ConstraintLayout>
@@ -139,6 +139,29 @@
                 android:id="@+id/timeSetButton"
                 android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/stockCard"
                 android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+                android:text="@string/set_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
+                android:id="@+id/setTimeTextR" app:layout_constraintTop_toBottomOf="@+id/limitDay"
+                android:layout_marginTop="16dp" android:textSize="20sp"/>
+        <Button
+                android:text="@string/l_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                android:id="@+id/lSettingButton" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/stockCard"/>
+        <Button
+                android:text="@string/r_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rSettingButton" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="16dp" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/stockCard"/>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
 
