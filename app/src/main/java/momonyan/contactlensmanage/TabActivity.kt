@@ -1,6 +1,5 @@
 package momonyan.contactlensmanage
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_more.*
-import java.util.*
 
 
 open class TabActivity : AppCompatActivity() {
@@ -56,6 +54,14 @@ open class TabActivity : AppCompatActivity() {
         val dlg = AlertDialog.Builder(this)
         dlg.setTitle("設定画面")
         dlg.setView(layout)
+        layout.stockIn.setText(sharedPreferences.getInt("stock", 0).toString(), TextView.BufferType.NORMAL)
+
+        when (sharedPreferences.getString("auto_setting", "not")) {
+            "2Week" -> layout.spinner.setSelection(0)
+            "1Month" -> layout.spinner.setSelection(1)
+            else -> layout.spinner.setSelection(2)
+        }
+
         setShardTexts(layout.makerIn, "maker")
         setShardTexts(layout.lensIn, "lens")
         setShardTexts(layout.typeIn, "type")
@@ -69,6 +75,9 @@ open class TabActivity : AppCompatActivity() {
             lensText.text = layout.lensIn.text
             typeText.text = layout.typeIn.text
             otherText.text = layout.otherIn.text
+
+            edit.putInt("stock", layout.stockIn.text.toString().toInt())
+            edit.putString("auto_setting", layout.spinner.selectedItem.toString())
 
             edit.putString("maker", layout.makerIn.text.toString())
             edit.putString("lens", layout.lensIn.text.toString())

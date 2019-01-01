@@ -28,7 +28,16 @@
     <string name="contact_lens">度数</string>
     <string name="contact_other">その他・メモ</string>
 
-    <string name="box_info">残り</string>
+    <string name="days_info">一括期間設定</string>
+    <string-array name="days_nums">
+        <item>2Week</item>
+        <item>1Month</item>
+        <item>手動入力</item>
+    </string-array>
+
+    <string name="box_info">在庫</string>
+    <string name="box_hint">残り</string>
+    <string name="box_num">%d個</string>
 
     <string name="times">通知時刻</string>
     <string name="funs">通知</string>
