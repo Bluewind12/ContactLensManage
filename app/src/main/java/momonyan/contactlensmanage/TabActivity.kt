@@ -1,5 +1,6 @@
 package momonyan.contactlensmanage
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -8,10 +9,12 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_more.*
-import kotlinx.android.synthetic.main.tab_more.view.*
+import java.util.*
 
 
 open class TabActivity : AppCompatActivity() {
@@ -30,7 +33,6 @@ open class TabActivity : AppCompatActivity() {
         container.adapter = mSectionsPagerAdapter
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
-
 
     }
 
@@ -54,7 +56,10 @@ open class TabActivity : AppCompatActivity() {
         val dlg = AlertDialog.Builder(this)
         dlg.setTitle("設定画面")
         dlg.setView(layout)
-
+        setShardTexts(layout.makerIn, "maker")
+        setShardTexts(layout.lensIn, "lens")
+        setShardTexts(layout.typeIn, "type")
+        setShardTexts(layout.otherIn, "other")
 
         dlg.setPositiveButton("決定") { dialog, which ->
 
@@ -79,4 +84,9 @@ open class TabActivity : AppCompatActivity() {
         // AlertDialogを表示する
         dlg.show()
     }
+
+    private fun setShardTexts(editText: EditText, string: String) {
+        editText.setText(sharedPreferences.getString(string, ""), TextView.BufferType.NORMAL)
+    }
+
 }

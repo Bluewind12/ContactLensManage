@@ -18,9 +18,8 @@
     <!-- 詳細画面 -->
     <string name="now_info">今使用中の情報</string>
     <string name="now_time1">何日まで？</string>
-    <string name="now_time2">月　日まで</string>
-    <string name="now_time2_day">%d月%d日まで</string>
-    <string name="now_time3">あと　日</string>
+    <string name="now_time2">%d月%d日まで</string>
+    <string name="now_time3">あと%d日</string>
 
     <string name="contact_info">コンタクトレンズ情報</string>
     <string name="contact_maker">メーカー</string>

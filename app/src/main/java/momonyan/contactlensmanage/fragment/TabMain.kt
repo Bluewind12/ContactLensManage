@@ -26,7 +26,7 @@ class TabMain : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.tab_main, container, false)
-        setShared()
+        sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
         setLimit()
 
         //日付設定時のリスナ作成
@@ -34,7 +34,7 @@ class TabMain : Fragment() {
             //ログ出力
             Log.d("DatePicker", "year:$year monthOfYear:$monthOfYear dayOfMonth:$dayOfMonth")
             v.setTimeText.text = getString(R.string.set_time, nowMonthOfYear, nowDayOfMonth)
-            v.minuteTimeText.text = getString(R.string.now_time2_day, monthOfYear + 1, dayOfMonth)
+            v.minuteTimeText.text = getString(R.string.now_time2, monthOfYear + 1, dayOfMonth)
             val edit = sharedPreferences.edit()
 
             //期限日
@@ -79,7 +79,7 @@ class TabMain : Fragment() {
         v.manyText.setTextColor(resources.getColor(R.color.default_text))
 
         if (month > 0 && day > 0 && year > 0) {
-            v.minuteTimeText.text = getString(R.string.now_time2_day, month, day)
+            v.minuteTimeText.text = getString(R.string.now_time2, month, day)
             v.setTimeText.text = getString(
                 R.string.set_time,
                 sharedPreferences.getInt("SetMonth", 0),
@@ -112,9 +112,5 @@ class TabMain : Fragment() {
             v.manyText.text = getString(R.string.not_setting)
             v.setTimeText.text = getString(R.string.not_setting)
         }
-    }
-
-    fun setShared() {
-        sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
     }
 }
