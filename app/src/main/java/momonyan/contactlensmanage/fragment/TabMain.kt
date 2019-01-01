@@ -1,7 +1,9 @@
 package momonyan.contactlensmanage.fragment
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -31,45 +33,123 @@ class TabMain : Fragment() {
 
         //日付設定時のリスナ作成
         val DateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, monthOfYear, dayOfMonth ->
-            //ログ出力
-            Log.d("DatePicker", "year:$year monthOfYear:$monthOfYear dayOfMonth:$dayOfMonth")
-            v.setTimeText.text = getString(R.string.set_time, nowMonthOfYear, nowDayOfMonth)
-            v.minuteTimeText.text = getString(R.string.now_time2, monthOfYear + 1, dayOfMonth)
-            val edit = sharedPreferences.edit()
+            AlertDialog.Builder(activity)
+                .setTitle("コンタクトレンズ 更新")
+                .setMessage("更新してもよろしいですか？")
+                .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                    //ログ出力
+                    Log.d("DatePicker", "year:$year monthOfYear:$monthOfYear dayOfMonth:$dayOfMonth")
 
-            //期限日
-            edit.putInt("Year", year)
-            edit.putInt("Month", monthOfYear + 1)
-            edit.putInt("Day", dayOfMonth)
+                    v.setTimeText.text = getString(R.string.set_time, nowMonthOfYear, nowDayOfMonth)
+                    v.minuteTimeText.text = getString(R.string.now_time2, monthOfYear + 1, dayOfMonth)
+                    val edit = sharedPreferences.edit()
 
-            //設定日
-            edit.putInt("SetYear", nowYear)
-            edit.putInt("SetMonth", nowMonthOfYear)
-            edit.putInt("SetDay", nowDayOfMonth)
+                    //期限日
+                    edit.putInt("Year", year)
+                    edit.putInt("Month", monthOfYear + 1)
+                    edit.putInt("Day", dayOfMonth)
 
-            //保存
-            edit.apply()
+                    //設定日
+                    edit.putInt("SetYear", nowYear)
+                    edit.putInt("SetMonth", nowMonthOfYear)
+                    edit.putInt("SetDay", nowDayOfMonth)
 
-            //更新
-            setLimit()
+                    //保存
+                    edit.apply()
+
+                    //更新
+                    setLimit()
+                })
+                .setNegativeButton("Cancel", null)
+                .show()
         }
 
         v.timeSetButton.setOnClickListener {
-            //日付情報の初期設定
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val monthOfYear = calendar.get(Calendar.MONTH)
-            val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+            when (sharedPreferences.getString("auto_setting", "not")) {
+                "2Week" -> {
+                    AlertDialog.Builder(activity)
+                        .setTitle("コンタクトレンズ 更新")
+                        .setMessage("2Week\n更新してもよろしいですか？")
+                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                            val stackCalendar = Calendar.getInstance()
+                            stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
+                            val addYear = stackCalendar.get(Calendar.YEAR)
+                            val addMonth = stackCalendar.get(Calendar.MONTH)
+                            val addDay = stackCalendar.get(Calendar.DAY_OF_MONTH)
 
-            //日付設定ダイアログの作成
-            datePickerDialog = DatePickerDialog(context, DateSetListener, year, monthOfYear, dayOfMonth)
+                            v.setTimeText.text = getString(R.string.set_time, nowMonthOfYear, nowDayOfMonth)
+                            v.minuteTimeText.text = getString(R.string.now_time2, addMonth + 1, addDay)
+                            val edit = sharedPreferences.edit()
 
-            //日付設定ダイアログの表示
-            datePickerDialog.show()
+                            //期限日
+                            edit.putInt("Year", addYear)
+                            edit.putInt("Month", addMonth + 1)
+                            edit.putInt("Day", addDay)
+
+                            //設定日
+                            edit.putInt("SetYear", nowYear)
+                            edit.putInt("SetMonth", nowMonthOfYear)
+                            edit.putInt("SetDay", nowDayOfMonth)
+
+                            //保存
+                            edit.apply()
+
+                            setLimit()
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show()
+                }
+                "1Month" -> {
+                    AlertDialog.Builder(activity)
+                        .setTitle("コンタクトレンズ 更新")
+                        .setMessage("1Month\n更新してもよろしいですか？")
+                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                            val stackCalendar = Calendar.getInstance()
+                            stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
+                            val addYear = stackCalendar.get(Calendar.YEAR)
+                            val addMonth = stackCalendar.get(Calendar.MONTH)
+                            val addDay = stackCalendar.get(Calendar.DAY_OF_MONTH)
+
+                            v.setTimeText.text = getString(R.string.set_time, nowMonthOfYear, nowDayOfMonth)
+                            v.minuteTimeText.text = getString(R.string.now_time2, addMonth + 1, addDay)
+                            val edit = sharedPreferences.edit()
+
+                            //期限日
+                            edit.putInt("Year", addYear)
+                            edit.putInt("Month", addMonth + 1)
+                            edit.putInt("Day", addDay)
+
+                            //設定日
+                            edit.putInt("SetYear", nowYear)
+                            edit.putInt("SetMonth", nowMonthOfYear)
+                            edit.putInt("SetDay", nowDayOfMonth)
+
+                            //保存
+                            edit.apply()
+
+                            setLimit()
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show()
+                }
+                else -> {
+                    //日付情報の初期設定
+                    val calendar = Calendar.getInstance()
+                    val year = calendar.get(Calendar.YEAR)
+                    val monthOfYear = calendar.get(Calendar.MONTH)
+                    val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
+
+                    //日付設定ダイアログの作成
+                    datePickerDialog = DatePickerDialog(context, DateSetListener, year, monthOfYear, dayOfMonth)
+
+                    //日付設定ダイアログの表示
+                    datePickerDialog.show()
+                }
+            }
         }
-
         return v
     }
+
 
     private  fun setLimit() {
         val year = sharedPreferences.getInt("Year", 0)
@@ -112,5 +192,18 @@ class TabMain : Fragment() {
             v.manyText.text = getString(R.string.not_setting)
             v.setTimeText.text = getString(R.string.not_setting)
         }
+
+        var stock = sharedPreferences.getInt("stock", 0) - 1
+
+        if(stock > 0) {
+            v.stockText.text = getString(R.string.box_num, stock)
+        }else{
+            v.stockText.text = getString(R.string.box_enp)
+            stock = 0
+        }
+            val edit = sharedPreferences.edit()
+            edit.putInt("stock", stock)
+            edit.apply()
+
     }
 }

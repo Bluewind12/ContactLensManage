@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.tab_more.view.*
 import momonyan.contactlensmanage.R
-import java.util.*
 
 class TabMore : Fragment() {
 
@@ -26,6 +25,18 @@ class TabMore : Fragment() {
         view.typeText.text = sharedPreferences.getString("type", getString(R.string.not_setting))
         view.otherText.text = sharedPreferences.getString("other", getString(R.string.not_setting))
 
+        view.makerText_2.text = sharedPreferences.getString("maker2", getString(R.string.not_setting))
+        view.lensText_2.text = sharedPreferences.getString("lens2", getString(R.string.not_setting))
+        view.typeText_2.text = sharedPreferences.getString("type2", getString(R.string.not_setting))
+        view.otherText_2.text = sharedPreferences.getString("other2", getString(R.string.not_setting))
+
+        if (sharedPreferences.getBoolean("LRSetting", false)) {
+            view.imageView3.setImageResource(R.drawable.l_icon)
+            view.cardView2_2.visibility = View.VISIBLE
+        }else{
+            view.imageView3.setImageResource(R.drawable.lr_icon)
+            view.cardView2_2.visibility = View.GONE
+        }
 
         return view
     }

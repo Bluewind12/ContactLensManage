@@ -36,11 +36,13 @@
     </string-array>
 
     <string name="box_info">在庫</string>
+    <string name="box_enp">在庫切れ</string>
     <string name="box_hint">残り</string>
-    <string name="box_num">%d個</string>
+    <string name="box_num">%dセット</string>
 
     <string name="times">通知時刻</string>
     <string name="funs">通知</string>
 
+    <string name="r_view">Rのみ</string>
 
 </resources>
