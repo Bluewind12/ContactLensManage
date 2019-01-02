@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_height="match_parent"
+            xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
 >
     <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                  android:layout_height="match_parent">
@@ -21,8 +23,7 @@
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/setTimeText"
-                app:cardUseCompatPadding="true"
-        >
+                app:cardUseCompatPadding="true">
 
             <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
                                                          android:layout_height="wrap_content">
@@ -105,8 +106,8 @@
                 android:layout_height="wrap_content" android:id="@+id/stockCard"
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/limitDay1"
-                app:cardUseCompatPadding="true" android:layout_marginTop="16dp">
+                app:cardUseCompatPadding="true" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/nend50">
 
             <android.support.constraint.ConstraintLayout android:layout_width="wrap_content"
                                                          android:layout_height="wrap_content">
@@ -166,6 +167,20 @@
                 android:layout_marginEnd="16dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/stockCard" android:textColor="@color/colorPrimaryDark"
                 android:background="@drawable/button_background"/>
+
+
+        <net.nend.android.NendAdView
+                android:id="@+id/nend50"
+                android:layout_width="320dp"
+                android:layout_height="50dp"
+                nendsdk:NendApiKey="@string/ad_apk_50"
+                nendsdk:NendSpotId="@integer/ad_id_50"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/limitDay1"
+                android:layout_marginBottom="16dp" android:layout_marginTop="16dp"/>
+
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
 

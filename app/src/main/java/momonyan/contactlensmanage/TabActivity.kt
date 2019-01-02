@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
 import kotlinx.android.synthetic.main.tab_more.*
+import net.nend.android.NendAdInterstitial
 
 open class TabActivity : AppCompatActivity() {
 
@@ -26,7 +27,7 @@ open class TabActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val moreInfo = this.layoutInflater.inflate(R.layout.tab_more, null)
+
         sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE)
         mSectionsPagerAdapter = TabAdapter(supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
