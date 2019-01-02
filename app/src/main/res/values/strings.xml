@@ -38,7 +38,12 @@
     <string name="box_info">在庫</string>
     <string name="box_enp">在庫切れ</string>
     <string name="box_hint">残り</string>
+    <string name="box_hint_l">L 残り</string>
+    <string name="box_hint_r">R 残り</string>
     <string name="box_num">%dセット</string>
+    <string name="box_num2">L:%dセット\nR:%dセット</string>
+    <string name="box_num3">L:在庫ぎれ\nR:%dセット</string>
+    <string name="box_num4">L:%dセット\nR:在庫ぎれ</string>
 
     <string name="times">通知時刻</string>
     <string name="funs">通知</string>
@@ -47,4 +52,5 @@
     <string name="r_set">R期限設定</string>
     <string name="l_set">L期限設定</string>
 
+    <string name="lr_toggle">LR切替</string>
 </resources>

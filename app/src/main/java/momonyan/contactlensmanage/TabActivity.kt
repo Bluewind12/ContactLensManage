@@ -14,21 +14,19 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
-import kotlinx.android.synthetic.main.tab_main.view.*
 import kotlinx.android.synthetic.main.tab_more.*
-
 
 open class TabActivity : AppCompatActivity() {
 
     private var mSectionsPagerAdapter: TabAdapter? = null
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
+    private var settingViewFrag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val moreInfo = this.layoutInflater.inflate(R.layout.tab_more, null)
-
         sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE)
         mSectionsPagerAdapter = TabAdapter(supportFragmentManager)
         container.adapter = mSectionsPagerAdapter
@@ -45,19 +43,23 @@ open class TabActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu1 -> {
-                settingDialogCreate()
+                if (settingViewFrag) {
+                    settingViewFrag = false
+                    settingDialogCreate()
+                }
             }
         }
         return true
     }
 
     private fun settingDialogCreate() {
+        val dlg = AlertDialog.Builder(this)
         val layout = this.layoutInflater.inflate(R.layout.setting_layout, null)
         //ダイアログボックス
-        val dlg = AlertDialog.Builder(this)
         dlg.setTitle("設定画面")
         dlg.setView(layout)
         layout.stockIn.setText(sharedPreferences.getInt("stock", 0).toString(), TextView.BufferType.NORMAL)
+        layout.stockIn2.setText(sharedPreferences.getInt("stock2", 0).toString(), TextView.BufferType.NORMAL)
 
         when (sharedPreferences.getString("auto_setting", "not")) {
             "2Week" -> layout.spinner.setSelection(0)
@@ -82,9 +84,19 @@ open class TabActivity : AppCompatActivity() {
             layout.settingRLTextView.text = "LR両方"
             layout.cardViewR.visibility = View.GONE
 
+            layout.stockLayout.hint = getString(R.string.box_hint)
+
+            layout.stockLayout2.visibility = View.GONE
+            layout.view2.visibility = View.GONE
         } else {
             layout.settingRLTextView.text = "Lのみ"
             layout.cardViewR.visibility = View.VISIBLE
+
+            layout.stockLayout.hint = getString(R.string.box_hint_l)
+            layout.stockLayout2.hint = getString(R.string.box_hint_r)
+
+            layout.stockLayout2.visibility = View.VISIBLE
+            layout.view2.visibility = View.VISIBLE
         }
 
         layout.toggleButton.isChecked = checkLR
@@ -93,9 +105,21 @@ open class TabActivity : AppCompatActivity() {
             if (!layout.toggleButton.isChecked) {
                 layout.settingRLTextView.text = "LR両方"
                 layout.cardViewR.visibility = View.GONE
+
+                layout.stockLayout.hint = getString(R.string.box_hint)
+
+                layout.stockLayout2.visibility = View.GONE
+                layout.view2.visibility = View.GONE
             } else {
                 layout.settingRLTextView.text = "Lのみ"
                 layout.cardViewR.visibility = View.VISIBLE
+
+                layout.stockLayout.hint = getString(R.string.box_hint_l)
+                layout.stockLayout2.hint = getString(R.string.box_hint_r)
+
+                layout.stockLayout2.visibility = View.VISIBLE
+                layout.view2.visibility = View.VISIBLE
+
             }
         }
 
@@ -134,8 +158,10 @@ open class TabActivity : AppCompatActivity() {
             }
 
             edit.putInt("stock", layout.stockIn.text.toString().toInt())
-            edit.putString("auto_setting", layout.spinner.selectedItem.toString())
+            edit.putInt("stock2", layout.stockIn2.text.toString().toInt())
 
+            //自動更新
+            edit.putString("auto_setting", layout.spinner.selectedItem.toString())
             edit.putBoolean("LRSetting", layout.toggleButton.isChecked)
 
             edit.putString("maker", layout.makerIn.text.toString())
@@ -149,11 +175,38 @@ open class TabActivity : AppCompatActivity() {
             edit.putString("other2", layout.otherIn_2.text.toString())
 
             edit.apply()
+
+            val stock = layout.stockIn.text.toString().toInt()
+            val stock2 = layout.stockIn2.text.toString().toInt()
+
+            if (!layout.toggleButton.isChecked) {
+                if (stock - 1 >= 0) {
+                    stockText.text = getString(R.string.box_num, stock)
+                } else {
+                    stockText.text = getString(R.string.box_enp)
+                }
+            } else {
+                if (stock - 1 >= 0 && stock2 - 1 >= 0) {
+                    stockText.text = getString(R.string.box_num2, stock, stock2)
+                } else if (stock - 1 < 0 && stock2 - 1 >= 0) {
+                    stockText.text = getString(R.string.box_num3, stock2)
+                } else if (stock - 1 >= 0 && stock2 - 1 < 0) {
+                    stockText.text = getString(R.string.box_num3, stock)
+                } else {
+                    stockText.text = getString(R.string.box_num4)
+                }
+            }
+            settingViewFrag = true
         }
 
         dlg.setNegativeButton("キャンセル") { dialog, which ->
-
+            settingViewFrag = true
         }
+
+        dlg.setOnCancelListener {
+            settingViewFrag = true
+        }
+
         // AlertDialogを表示する
         dlg.show()
     }

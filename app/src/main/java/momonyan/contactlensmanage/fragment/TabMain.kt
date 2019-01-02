@@ -27,15 +27,20 @@ class TabMain : Fragment() {
     val nowMonthOfYear = nowCalendar.get(Calendar.MONTH) + 1
     val nowDayOfMonth = nowCalendar.get(Calendar.DAY_OF_MONTH)
 
-    var fragLR = false 
+    var fragLR = false
+    var editFrag = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.tab_main, container, false)
         sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
+
+        //初期セット
         fragLR = true
         setLimit()
         fragLR = false
         setLimit()
+
+        editFrag = true
 
         //日付設定時のリスナ作成
         val DateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, monthOfYear, dayOfMonth ->
@@ -427,17 +432,46 @@ class TabMain : Fragment() {
             setTime.text = getString(R.string.not_setting)
         }
 
-        var stock = sharedPreferences.getInt("stock", 0) - 1
 
-        if(stock > 0) {
-            v.stockText.text = getString(R.string.box_num, stock)
-        }else{
-            v.stockText.text = getString(R.string.box_enp)
-            stock = 0
+        var stock = sharedPreferences.getInt("stock", 0)
+        var stock2 = sharedPreferences.getInt("stock2", 0)
+        if (editFrag) {
+            if (fragLR) {
+                stock--
+            } else {
+                stock2--
+            }
         }
+        if (!sharedPreferences.getBoolean("LRSetting", false)) {
+            if (stock - 1 >= 0) {
+                v.stockText.text = getString(R.string.box_num, stock)
+            } else {
+                v.stockText.text = getString(R.string.box_enp)
+                stock = 1
+            }
+        } else {
+            if (stock - 1 >= 0 && stock2 - 1 >= 0) {
+                v.stockText.text = getString(R.string.box_num2, stock, stock2)
+            } else if (stock - 1 < 0 && stock2 - 1 >= 0) {
+                v.stockText.text = getString(R.string.box_num3, stock2)
+                stock = 1
+            } else if (stock - 1 >= 0 && stock2 - 1 < 0) {
+                v.stockText.text = getString(R.string.box_num3, stock)
+                stock2 = 1
+            } else {
+                v.stockText.text = getString(R.string.box_num4)
+                stock = 1
+                stock2 = 1
+            }
+        }
+        if (editFrag) {
             val edit = sharedPreferences.edit()
-            edit.putInt("stock", stock)
+            if (fragLR) {
+                edit.putInt("stock", stock)
+            } else {
+                edit.putInt("stock2", stock2)
+            }
             edit.apply()
-
+        }
     }
 }
