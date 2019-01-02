@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.tab_main.view.*
 import momonyan.contactlensmanage.R
+import net.nend.android.NendAdInterstitial
 import java.util.*
 
 
@@ -29,6 +30,7 @@ class TabMain : Fragment() {
 
     var fragLR = false
     var editFrag = false
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.tab_main, container, false)
@@ -454,14 +456,14 @@ class TabMain : Fragment() {
                 v.stockText.text = getString(R.string.box_num2, stock, stock2)
             } else if (stock - 1 < 0 && stock2 - 1 >= 0) {
                 v.stockText.text = getString(R.string.box_num3, stock2)
-                stock = 1
+                stock = 0
             } else if (stock - 1 >= 0 && stock2 - 1 < 0) {
-                v.stockText.text = getString(R.string.box_num3, stock)
-                stock2 = 1
+                v.stockText.text = getString(R.string.box_num4, stock)
+                stock2 = 0
             } else {
-                v.stockText.text = getString(R.string.box_num4)
-                stock = 1
-                stock2 = 1
+                v.stockText.text = getString(R.string.box_enp)
+                stock = 0
+                stock2 = 0
             }
         }
         if (editFrag) {

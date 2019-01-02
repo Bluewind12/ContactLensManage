@@ -24,9 +24,19 @@ open class TabActivity : AppCompatActivity() {
     private lateinit var edit: SharedPreferences.Editor
     private var settingViewFrag = true
 
+    private var settingChangeAd: Int = 0
+    private var tabChangeAd: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        settingChangeAd = resources.getInteger(R.integer.ad_id_pop_setting)
+        tabChangeAd = resources.getInteger(R.integer.ad_id_pop_setting)
+
+        //広告設定
+        NendAdInterstitial.loadAd(this, getString(R.string.ad_apk_pop_setting), settingChangeAd)
+        NendAdInterstitial.loadAd(this, getString(R.string.ad_apk_pop_tab), tabChangeAd)
 
         sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE)
         mSectionsPagerAdapter = TabAdapter(supportFragmentManager)
@@ -34,6 +44,17 @@ open class TabActivity : AppCompatActivity() {
         container.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(container))
 
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                NendAdInterstitial.showAd(this@TabActivity, tabChangeAd)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -192,20 +213,23 @@ open class TabActivity : AppCompatActivity() {
                 } else if (stock - 1 < 0 && stock2 - 1 >= 0) {
                     stockText.text = getString(R.string.box_num3, stock2)
                 } else if (stock - 1 >= 0 && stock2 - 1 < 0) {
-                    stockText.text = getString(R.string.box_num3, stock)
+                    stockText.text = getString(R.string.box_num4, stock)
                 } else {
-                    stockText.text = getString(R.string.box_num4)
+                    stockText.text = getString(R.string.box_enp)
                 }
             }
             settingViewFrag = true
+            NendAdInterstitial.showAd(this, settingChangeAd)
         }
 
         dlg.setNegativeButton("キャンセル") { dialog, which ->
             settingViewFrag = true
+            NendAdInterstitial.showAd(this, settingChangeAd)
         }
 
         dlg.setOnCancelListener {
             settingViewFrag = true
+            NendAdInterstitial.showAd(this, settingChangeAd)
         }
 
         // AlertDialogを表示する

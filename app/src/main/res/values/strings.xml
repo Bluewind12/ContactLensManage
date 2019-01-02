@@ -56,13 +56,13 @@
 
 
     <!-- 広告IDなど -->
-    <integer name="ad_id_50">3174</integer>
-    <integer name="ad_id_100">71000</integer>
-    <integer name="ad_id_pop">213206</integer>
-    <integer name="ad_id_pop_setting">213206</integer>
+    <integer name="ad_id_50">931743</integer>
+    <integer name="ad_id_100">931744</integer>
+    <integer name="ad_id_pop_tab">931745</integer>
+    <integer name="ad_id_pop_setting">931746</integer>
     <!-- 広告Apk -->
-    <string name="ad_apk_50">c5cb8bc474345961c6e7a9778c947957ed8e1e4f</string>
-    <string name="ad_apk_100">8932b68d22d1d32f5d7251f9897a6aa64117995e</string>
-    <string name="ad_apk_pop">8c278673ac6f676dae60a1f56d16dad122e23516</string>
-    <string name="ad_apk_pop_setting">8c278673ac6f676dae60a1f56d16dad122e23516</string>
+    <string name="ad_apk_50">01de7a024841ede21601fcd977c2081bd820e23a</string>
+    <string name="ad_apk_100">363bcceed5c8603523054869911ced39e2b8aebc</string>
+    <string name="ad_apk_pop_tab">7ce7f2ee4f6d12726bf75a64dc2ec0673d088d6f</string>
+    <string name="ad_apk_pop_setting">9d84e2a375e0a9c189de1bc2a420797e9cad5c01</string>
 </resources>
