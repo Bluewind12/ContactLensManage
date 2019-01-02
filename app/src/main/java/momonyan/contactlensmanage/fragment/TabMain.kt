@@ -449,7 +449,7 @@ class TabMain : Fragment() {
                 v.stockText.text = getString(R.string.box_num, stock)
             } else {
                 v.stockText.text = getString(R.string.box_enp)
-                stock = 1
+                stock = 0
             }
         } else {
             if (stock - 1 >= 0 && stock2 - 1 >= 0) {

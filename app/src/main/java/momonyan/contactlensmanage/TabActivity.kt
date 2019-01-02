@@ -1,7 +1,9 @@
 package momonyan.contactlensmanage
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AlertDialog
@@ -55,6 +57,13 @@ open class TabActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+
+        fab.setOnClickListener {
+            if (settingViewFrag) {
+                settingViewFrag = false
+                settingDialogCreate()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,11 +73,30 @@ open class TabActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu1 -> {
-                if (settingViewFrag) {
-                    settingViewFrag = false
-                    settingDialogCreate()
-                }
+            R.id.menu2 ->{
+                AlertDialog.Builder(this)
+                    .setTitle("Webページを開きます")
+                    .setMessage("「プライバシーポリシー」\n「利用素材について」\nのページを開いてもよろしいですか？")
+                    .setPositiveButton("はい") { _, _ ->
+                        val uri = Uri.parse(getString(R.string.privacy_policy))
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("いいえ", null)
+                    .show()
+            }
+            R.id.menu3 -> {
+                AlertDialog.Builder(this)
+                    .setTitle("Webページを開きます")
+                    .setMessage("「意見・感想・報告について」\nのページを開いてもよろしいですか？")
+                    .setPositiveButton("はい") { _, _ ->
+                        val uri = Uri.parse(getString(R.string.enquete_url))
+                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("いいえ", null)
+                    .show()
+                return true
             }
         }
         return true
