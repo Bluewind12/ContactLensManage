@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">コンマネ！</string>
-    <string name="view_title">コンタクト★管理</string>
+    <string name="view_title">コンマネ！</string>
     <string name="contact_R_setting">R 設定</string>
     <string name="contact_L_setting">L 設定</string>
     <string name="contact_LR_setting">期限設定</string>
@@ -68,6 +68,6 @@
     <string name="ad_apk_pop_setting">9d84e2a375e0a9c189de1bc2a420797e9cad5c01</string>
     
     <!-- URL -->
-    <string name="privacy_policy">http://</string>
+    <string name="privacy_policy">https://www.gensounosakura.work/posts/5501843</string>
     <string name="enquete_url">https://goo.gl/forms/5nkpgZ3ykued2lCe2</string>
 </resources>
