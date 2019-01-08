@@ -126,9 +126,9 @@ open class TabActivity : AppCompatActivity() {
         var pushMinute = sharedPreferences.getInt("pushMinute", 0)
         layout.pushTimeIn.setText(String.format("%02d:%02d", pushHour, pushMinute), TextView.BufferType.NORMAL)
         //スイッチ設定
-        var push = sharedPreferences.getBoolean("push", false)
+        val push = sharedPreferences.getBoolean("push", false)
         layout.switch1.isChecked = push
-        layout.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+        layout.switch1.setOnCheckedChangeListener { _, isChecked ->
             layout.pushTimeIn.isEnabled = isChecked
         }
 
@@ -140,11 +140,14 @@ open class TabActivity : AppCompatActivity() {
             val minute = calendar.get(Calendar.MINUTE)
             val timepick = TimePickerDialog(
                 this,
-                TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                TimePickerDialog.OnTimeSetListener { _, hourOfDay, minuteTime ->
                     // 設定 ボタンクリック時の処理
-                    layout.pushTimeIn.setText(String.format("%02d:%02d", hourOfDay,minute), TextView.BufferType.NORMAL)
+                    layout.pushTimeIn.setText(
+                        String.format("%02d:%02d", hourOfDay, minuteTime),
+                        TextView.BufferType.NORMAL
+                    )
                     pushHour = hourOfDay
-                    pushMinute = minute
+                    pushMinute = minuteTime
                 },
                 hour,
                 minute,
@@ -174,7 +177,7 @@ open class TabActivity : AppCompatActivity() {
         val checkLR = sharedPreferences.getBoolean("LRSetting", false)
 
         if (!checkLR) {
-            layout.settingRLTextView.text = "LR両方"
+            layout.settingRLTextView.text = getString(R.string.lr_both)
             layout.cardViewR.visibility = View.GONE
 
             layout.stockLayout.hint = getString(R.string.box_hint)
@@ -196,7 +199,7 @@ open class TabActivity : AppCompatActivity() {
 
         layout.toggleButton.setOnClickListener {
             if (!layout.toggleButton.isChecked) {
-                layout.settingRLTextView.text = "LR両方"
+                layout.settingRLTextView.text = getString(R.string.lr_both)
                 layout.cardViewR.visibility = View.GONE
 
                 layout.stockLayout.hint = getString(R.string.box_hint)
@@ -216,7 +219,7 @@ open class TabActivity : AppCompatActivity() {
             }
         }
 
-        dlg.setPositiveButton("決定") { dialog, which ->
+        dlg.setPositiveButton("決定") { _, _ ->
 
             edit = sharedPreferences.edit()
 
@@ -313,7 +316,7 @@ open class TabActivity : AppCompatActivity() {
             NendAdInterstitial.showAd(this, settingChangeAd)
         }
 
-        dlg.setNegativeButton("キャンセル") { dialog, which ->
+        dlg.setNegativeButton("キャンセル") { _, _ ->
             settingViewFrag = true
             NendAdInterstitial.showAd(this, settingChangeAd)
         }
