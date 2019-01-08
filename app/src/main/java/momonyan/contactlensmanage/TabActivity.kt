@@ -14,10 +14,15 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.setting_layout.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
 import kotlinx.android.synthetic.main.tab_more.*
 import net.nend.android.NendAdInterstitial
+import android.widget.TimePicker
+import android.app.TimePickerDialog
+import java.util.*
+
 
 open class TabActivity : AppCompatActivity() {
 
@@ -110,6 +115,24 @@ open class TabActivity : AppCompatActivity() {
         dlg.setView(layout)
         layout.stockIn.setText(sharedPreferences.getInt("stock", 0).toString(), TextView.BufferType.NORMAL)
         layout.stockIn2.setText(sharedPreferences.getInt("stock2", 0).toString(), TextView.BufferType.NORMAL)
+
+        layout.pushTimeIn.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val hour = calendar.get(Calendar.HOUR_OF_DAY)
+            val minute = calendar.get(Calendar.MINUTE)
+            val timepick = TimePickerDialog(
+                this,
+                TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                    // 設定 ボタンクリック時の処理
+                    layout.pushTimeIn.setText(String.format("%02d:%02d", hourOfDay,minute), TextView.BufferType.NORMAL)
+                },
+                hour,
+                minute,
+                true
+            )
+            timepick.show()
+        }
+
 
         when (sharedPreferences.getString("auto_setting", "not")) {
             "2Week" -> layout.spinner.setSelection(0)
