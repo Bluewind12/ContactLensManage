@@ -1,5 +1,9 @@
 package momonyan.contactlensmanage
 
+import android.app.AlarmManager
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,13 +18,10 @@ import android.view.View
 import android.widget.EditText
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.setting_layout.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
 import kotlinx.android.synthetic.main.tab_more.*
 import net.nend.android.NendAdInterstitial
-import android.widget.TimePicker
-import android.app.TimePickerDialog
 import java.util.*
 
 
@@ -39,7 +40,10 @@ open class TabActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         settingChangeAd = resources.getInteger(R.integer.ad_id_pop_setting)
-        tabChangeAd = resources.getInteger(R.integer.ad_id_pop_setting)
+        tabChangeAd = resources.getInteger(R.integer.ad_id_pop_tab)
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        notificationManager.cancelAll()
 
         //広告設定
         NendAdInterstitial.loadAd(this, getString(R.string.ad_apk_pop_setting), settingChangeAd)
@@ -110,12 +114,26 @@ open class TabActivity : AppCompatActivity() {
     private fun settingDialogCreate() {
         val dlg = AlertDialog.Builder(this)
         val layout = this.layoutInflater.inflate(R.layout.setting_layout, null)
+
         //ダイアログボックス
         dlg.setTitle("設定画面")
         dlg.setView(layout)
         layout.stockIn.setText(sharedPreferences.getInt("stock", 0).toString(), TextView.BufferType.NORMAL)
         layout.stockIn2.setText(sharedPreferences.getInt("stock2", 0).toString(), TextView.BufferType.NORMAL)
 
+        //通知時刻設定など
+        var pushHour = sharedPreferences.getInt("pushHour", 0)
+        var pushMinute = sharedPreferences.getInt("pushMinute", 0)
+        layout.pushTimeIn.setText(String.format("%02d:%02d", pushHour, pushMinute), TextView.BufferType.NORMAL)
+        //スイッチ設定
+        var push = sharedPreferences.getBoolean("push", false)
+        layout.switch1.isChecked = push
+        layout.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+            layout.pushTimeIn.isEnabled = isChecked
+        }
+
+        layout.pushTimeIn.isEnabled = push
+        layout.pushTimeIn.setFocusable(false)
         layout.pushTimeIn.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -125,6 +143,8 @@ open class TabActivity : AppCompatActivity() {
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     // 設定 ボタンクリック時の処理
                     layout.pushTimeIn.setText(String.format("%02d:%02d", hourOfDay,minute), TextView.BufferType.NORMAL)
+                    pushHour = hourOfDay
+                    pushMinute = minute
                 },
                 hour,
                 minute,
@@ -247,11 +267,17 @@ open class TabActivity : AppCompatActivity() {
             edit.putString("type2", layout.typeIn_2.text.toString())
             edit.putString("other2", layout.otherIn_2.text.toString())
 
+            //通知
+            edit.putInt("pushHour", pushHour)
+            edit.putInt("pushMinute", pushMinute)
+            edit.putBoolean("push", layout.switch1.isChecked)
+
             edit.apply()
 
             val stock = layout.stockIn.text.toString().toInt()
             val stock2 = layout.stockIn2.text.toString().toInt()
 
+            //在庫個数の表示更新
             if (!layout.toggleButton.isChecked) {
                 if (stock - 1 >= 0) {
                     stockText.text = getString(R.string.box_num, stock)
@@ -267,6 +293,20 @@ open class TabActivity : AppCompatActivity() {
                     stockText.text = getString(R.string.box_num4, stock)
                 } else {
                     stockText.text = getString(R.string.box_enp)
+                }
+            }
+
+            //通知更新
+            deleteAlarm(0)
+            deleteAlarm(1)
+            deleteAlarm(2)
+
+            if (layout.switch1.isChecked) {
+                if (!layout.toggleButton.isChecked) {
+                    AlarmPush().setNotification(2, sharedPreferences, applicationContext)//LR
+                } else {
+                    AlarmPush().setNotification(0, sharedPreferences, applicationContext)//L
+                    AlarmPush().setNotification(1, sharedPreferences, applicationContext)//R
                 }
             }
             settingViewFrag = true
@@ -289,6 +329,15 @@ open class TabActivity : AppCompatActivity() {
 
     private fun setShardTexts(editText: EditText, string: String) {
         editText.setText(sharedPreferences.getString(string, ""), TextView.BufferType.NORMAL)
+    }
+
+    private fun deleteAlarm(requestCode: Int) {
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val intent = Intent(this, Notifier::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(applicationContext, requestCode, intent, 0)
+        pendingIntent.cancel()
+        alarmManager.cancel(pendingIntent)
     }
 
 }

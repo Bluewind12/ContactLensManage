@@ -1,13 +1,9 @@
 package momonyan.contactlensmanage.fragment
 
-import android.app.AlarmManager
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Context.ALARM_SERVICE
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.tab_main.view.*
-import momonyan.contactlensmanage.Notifier
+import momonyan.contactlensmanage.AlarmPush
 import momonyan.contactlensmanage.R
 import java.util.*
 
@@ -401,7 +397,7 @@ class TabMain : Fragment() {
                     R.string.set_time,
                     sharedPreferences.getInt("SetMonth", 0),
                     sharedPreferences.getInt("SetDay", 0)
-            )
+                )
             } else {
                 setTime.text = getString(
                     R.string.set_time,
@@ -477,18 +473,19 @@ class TabMain : Fragment() {
                 edit.putInt("stock2", stock2)
             }
             edit.apply()
+        }
+        //通知の更新
+        if (sharedPreferences.getBoolean("push", false) && editFrag) {
+            if(sharedPreferences.getBoolean("setLR", false)) {
+                AlarmPush().setNotification(2, sharedPreferences,activity)//LR
+            }else{
+                if(fragLR){
+                    AlarmPush().setNotification(0, sharedPreferences,activity)//L
+                }else{
+                    AlarmPush().setNotification(1, sharedPreferences,activity)//R
+                }
+            }
 
-            val triggerTime = Calendar.getInstance()
-            triggerTime.set(year, month - 1, day)
-//            triggerTime.add(Calendar.SECOND, 5)//今から5秒後
-
-            val intent = Intent(activity, Notifier::class.java)
-            val sender = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-            val manager = activity!!.getSystemService(ALARM_SERVICE) as AlarmManager?
-            manager!!.set(AlarmManager.RTC_WAKEUP, triggerTime.timeInMillis, sender)
         }
     }
-
-
 }

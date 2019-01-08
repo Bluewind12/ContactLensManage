@@ -18,6 +18,7 @@
 
     <!-- 詳細画面 -->
     <string name="push">通知設定</string>
+    <string name="push1">通知</string>
     <string name="push_times">通知時間設定</string>
     <string name="push_on">通知ON</string>
     <string name="push_off">通知OFF</string>

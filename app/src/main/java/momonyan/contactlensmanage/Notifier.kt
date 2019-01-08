@@ -13,23 +13,32 @@ class Notifier : BroadcastReceiver() {
 
     override fun onReceive(content: Context, intent: Intent) {
 
+        val id = intent.getIntExtra("LR", 0)
         //通知がクリックされた時に発行されるIntentの生成
         val sendIntent = Intent(content, TabActivity::class.java)
         val sender = PendingIntent.getActivity(content, 0, sendIntent, 0)
 
+        val message: String
+
+        if (id == 0) {
+            message = "コンタクト(L)の交換日です！"
+        } else if (id == 1) {
+            message = "コンタクト(R)の交換日です！"
+        } else {
+            message = "コンタクトの交換日です！"
+        }
         //通知オブジェクトの生成
         val noti = NotificationCompat.Builder(content)
             .setTicker("交換日です！")
             .setContentTitle("コンタクトマネージャー")
-            .setContentText("コンタクトの交換日です")
+            .setContentText(message)
             .setSmallIcon(R.drawable.contact_app_icon)
             .setVibrate(longArrayOf(0, 200, 100, 200, 100, 200))
             .setAutoCancel(true)
             .setContentIntent(sender)
             .build()
-        Log.d("AAA","TESTEMA")
 
         val manager = content.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify(0, noti)
+        manager.notify("Notify",id, noti)
     }
 }

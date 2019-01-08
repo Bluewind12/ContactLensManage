@@ -315,7 +315,7 @@
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp" android:id="@+id/textView5" android:textSize="24sp"/>
             <Switch
-                    android:text="@string/push"
+                    android:text="@string/push1"
                     android:layout_width="wrap_content"
                     android:layout_height="26dp"
                     android:id="@+id/switch1" android:textOn="@string/push_on" android:textOff="@string/push_off"
