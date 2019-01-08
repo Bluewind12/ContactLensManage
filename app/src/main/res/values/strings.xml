@@ -17,6 +17,11 @@
     <string name="tab2">詳細画面</string>
 
     <!-- 詳細画面 -->
+    <string name="push">通知設定</string>
+    <string name="push_times">通知時間設定</string>
+    <string name="push_on">通知ON</string>
+    <string name="push_off">通知OFF</string>
+
     <string name="now_info">今使用中の情報</string>
     <string name="now_time1">何日まで？</string>
     <string name="now_time2">%d月%d日まで</string>
