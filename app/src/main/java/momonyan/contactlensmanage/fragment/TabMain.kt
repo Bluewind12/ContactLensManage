@@ -1,9 +1,13 @@
 package momonyan.contactlensmanage.fragment
 
+import android.app.AlarmManager
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,10 +17,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.tab_main.view.*
+import momonyan.contactlensmanage.Notifier
 import momonyan.contactlensmanage.R
-import net.nend.android.NendAdInterstitial
 import java.util.*
-
 
 class TabMain : Fragment() {
     private lateinit var sharedPreferences: SharedPreferences
@@ -474,6 +477,18 @@ class TabMain : Fragment() {
                 edit.putInt("stock2", stock2)
             }
             edit.apply()
+
+            val triggerTime = Calendar.getInstance()
+            triggerTime.set(year, month - 1, day)
+//            triggerTime.add(Calendar.SECOND, 5)//今から5秒後
+
+            val intent = Intent(activity, Notifier::class.java)
+            val sender = PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+
+            val manager = activity!!.getSystemService(ALARM_SERVICE) as AlarmManager?
+            manager!!.set(AlarmManager.RTC_WAKEUP, triggerTime.timeInMillis, sender)
         }
     }
+
+
 }
