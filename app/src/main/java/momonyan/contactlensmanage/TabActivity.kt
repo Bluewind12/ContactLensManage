@@ -156,26 +156,29 @@ open class TabActivity : AppCompatActivity() {
             timepick.show()
         }
 
-
+        //自動更新スピナーの初期位置
         when (sharedPreferences.getString("auto_setting", "not")) {
             "2Week" -> layout.spinner.setSelection(0)
             "1Month" -> layout.spinner.setSelection(1)
             else -> layout.spinner.setSelection(2)
         }
 
+        //EditTextに文字の挿入
+        //L(LR)
         setShardTexts(layout.makerIn, "maker")
         setShardTexts(layout.lensIn, "lens")
         setShardTexts(layout.typeIn, "type")
         setShardTexts(layout.otherIn, "other")
-
+        //R
         setShardTexts(layout.makerIn_2, "maker2")
         setShardTexts(layout.lensIn_2, "lens2")
         setShardTexts(layout.typeIn_2, "type2")
         setShardTexts(layout.otherIn_2, "other2")
 
-
+        //LR管理法
+        //true : LR別
+        //false: LR同時
         val checkLR = sharedPreferences.getBoolean("LRSetting", false)
-
         if (!checkLR) {
             layout.settingRLTextView.text = getString(R.string.lr_both)
             layout.cardViewR.visibility = View.GONE
@@ -194,9 +197,8 @@ open class TabActivity : AppCompatActivity() {
             layout.stockLayout2.visibility = View.VISIBLE
             layout.view2.visibility = View.VISIBLE
         }
-
+        //トグルボタン設定
         layout.toggleButton.isChecked = checkLR
-
         layout.toggleButton.setOnClickListener {
             if (!layout.toggleButton.isChecked) {
                 layout.settingRLTextView.text = getString(R.string.lr_both)
