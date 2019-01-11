@@ -3,7 +3,6 @@ package momonyan.contactlensmanage.fragment
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -48,7 +47,7 @@ class TabMain : Fragment() {
             AlertDialog.Builder(activity)
                 .setTitle("コンタクトレンズ 更新")
                 .setMessage("更新してもよろしいですか？")
-                .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                .setPositiveButton("OK") { _, _ ->
                     //ログ出力
                     Log.d("DatePicker", "year:$year monthOfYear:$monthOfYear dayOfMonth:$dayOfMonth")
                     val edit = sharedPreferences.edit()
@@ -86,7 +85,7 @@ class TabMain : Fragment() {
 
                     //更新
                     setLimit()
-                })
+                }
                 .setNegativeButton("Cancel", null)
                 .show()
         }
@@ -98,7 +97,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("2Week\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -123,7 +122,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }
@@ -131,7 +130,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("1Month\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -156,7 +155,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }
@@ -182,7 +181,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("2Week\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -207,7 +206,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }
@@ -215,7 +214,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("1Month\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -240,7 +239,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }
@@ -266,7 +265,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("2Week\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -291,7 +290,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }
@@ -299,7 +298,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("1Month\n更新してもよろしいですか？")
-                        .setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
+                        .setPositiveButton("OK") { dialog, which ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -324,7 +323,7 @@ class TabMain : Fragment() {
                             edit.apply()
 
                             setLimit()
-                        })
+                        }
                         .setNegativeButton("Cancel", null)
                         .show()
                 }

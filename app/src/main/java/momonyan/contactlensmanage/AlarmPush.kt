@@ -64,25 +64,21 @@ class AlarmPush : AppCompatActivity() {
         val notificationMinute = sharedPreferences.getInt("pushMinute", 0)
 
         when (request) {
-            0 -> {
+            0, 2 -> {
                 year = sharedPreferences.getInt("Year", 0)
                 month = sharedPreferences.getInt("Month", 0)
                 day = sharedPreferences.getInt("Day", 0)
-                requestCode = 0
             }
             1 -> {
                 year = sharedPreferences.getInt("Year2", 0)
                 month = sharedPreferences.getInt("Month2", 0)
                 day = sharedPreferences.getInt("Day2", 0)
-                requestCode = 1
             }
             else -> {
-                year = sharedPreferences.getInt("Year", 0)
-                month = sharedPreferences.getInt("Month", 0)
-                day = sharedPreferences.getInt("Day", 0)
-                requestCode = 2
+                error("NotiError")
             }
         }
+        requestCode = request
         val triggerTime = Calendar.getInstance()
         triggerTime.set(year, month - 1, day, notificationHour, notificationMinute, requestCode)
 
