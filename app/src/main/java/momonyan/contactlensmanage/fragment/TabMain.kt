@@ -44,7 +44,7 @@ class TabMain : Fragment() {
         editFrag = true
 
         //日付設定時のリスナ作成
-        val DateSetListener = DatePickerDialog.OnDateSetListener { datePicker, year, monthOfYear, dayOfMonth ->
+        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             AlertDialog.Builder(activity)
                 .setTitle("コンタクトレンズ 更新")
                 .setMessage("更新してもよろしいですか？")
@@ -168,7 +168,7 @@ class TabMain : Fragment() {
                     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
                     //日付設定ダイアログの作成
-                    datePickerDialog = DatePickerDialog(context, DateSetListener, year, monthOfYear, dayOfMonth)
+                    datePickerDialog = DatePickerDialog(context!!, dateSetListener, year, monthOfYear, dayOfMonth)
 
                     //日付設定ダイアログの表示
                     datePickerDialog.show()
@@ -252,7 +252,7 @@ class TabMain : Fragment() {
                     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
                     //日付設定ダイアログの作成
-                    datePickerDialog = DatePickerDialog(context, DateSetListener, year, monthOfYear, dayOfMonth)
+                    datePickerDialog = DatePickerDialog(context!!, dateSetListener, year, monthOfYear, dayOfMonth)
 
                     //日付設定ダイアログの表示
                     datePickerDialog.show()
@@ -299,7 +299,7 @@ class TabMain : Fragment() {
                     AlertDialog.Builder(activity)
                         .setTitle("コンタクトレンズ 更新")
                         .setMessage("1Month\n更新してもよろしいですか？")
-                        .setPositiveButton("OK") { dialog, which ->
+                        .setPositiveButton("OK") { _, _ ->
                             val stackCalendar = Calendar.getInstance()
                             stackCalendar.add(Calendar.DAY_OF_MONTH, 14)
                             val addYear = stackCalendar.get(Calendar.YEAR)
@@ -336,7 +336,7 @@ class TabMain : Fragment() {
                     val dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH)
 
                     //日付設定ダイアログの作成
-                    datePickerDialog = DatePickerDialog(context, DateSetListener, year, monthOfYear, dayOfMonth)
+                    datePickerDialog = DatePickerDialog(context!!, dateSetListener, year, monthOfYear, dayOfMonth)
 
                     //日付設定ダイアログの表示
                     datePickerDialog.show()
