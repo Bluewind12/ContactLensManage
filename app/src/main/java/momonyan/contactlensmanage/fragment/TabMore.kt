@@ -18,7 +18,7 @@ class TabMore : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_more, container, false)
 
-        sharedPreferences = activity!!.getSharedPreferences("Data",Context.MODE_PRIVATE)
+        sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
 
         view.makerText.text = sharedPreferences.getString("maker", getString(R.string.not_setting))
         view.lensText.text = sharedPreferences.getString("lens", getString(R.string.not_setting))
@@ -33,7 +33,7 @@ class TabMore : Fragment() {
         if (sharedPreferences.getBoolean("LRSetting", false)) {
             view.imageView3.setImageResource(R.drawable.l_icon)
             view.cardView2_2.visibility = View.VISIBLE
-        }else{
+        } else {
             view.imageView3.setImageResource(R.drawable.lr_icon)
             view.cardView2_2.visibility = View.GONE
         }

@@ -82,7 +82,7 @@ open class TabActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu2 ->{
+            R.id.menu2 -> {
                 AlertDialog.Builder(this)
                     .setTitle("Webページを開きます")
                     .setMessage("「プライバシーポリシー」\n「利用素材について」\nのページを開いてもよろしいですか？")

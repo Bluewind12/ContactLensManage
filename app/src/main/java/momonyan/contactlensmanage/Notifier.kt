@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.support.v4.app.NotificationCompat
-import android.util.Log
 
 
 class Notifier : BroadcastReceiver() {
@@ -39,6 +38,6 @@ class Notifier : BroadcastReceiver() {
             .build()
 
         val manager = content.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        manager.notify("Notify",id, noti)
+        manager.notify("Notify", id, noti)
     }
 }
