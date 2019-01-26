@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.tab_main.view.*
+import me.mattak.moment.Moment
 import momonyan.contactlensmanage.AlarmPush
 import momonyan.contactlensmanage.R
 import java.util.*
@@ -363,14 +364,16 @@ class TabMain : Fragment() {
     }
 
 
-    private  fun setLimit() {
+    private fun setLimit() {
         val year: Int
         val month: Int
         val day: Int
         val limitSetText: TextView
         val many: TextView
         val setTime: TextView
+        val calendar = Calendar.getInstance()
 
+        //設定日の取得
         if (fragLR) {
             limitSetText = v.minuteTimeText
             many = v.manyText
@@ -385,10 +388,16 @@ class TabMain : Fragment() {
             year = sharedPreferences.getInt("Year2", 0)
             month = sharedPreferences.getInt("Month2", 0)
             day = sharedPreferences.getInt("Day2", 0)
-
         }
+        //色戻し
         many.setTextColor(resources.getColor(R.color.default_text))
 
+        //カレンダーの設定
+        calendar.set(year, month - 1, day, 0, 0, 0)
+        val nowMoment = Moment() // 現在の日時
+        val setDateMoment = Moment(calendar.time, TimeZone.getDefault(), Locale.JAPAN) // 現在の日時
+        Log.d("TEST_TAG", "${nowMoment.format("yyyy年MM月dd日 HH時mm分ss秒　タイムゾーン：ZZZZ")}")
+        Log.d("TEST_TAG", "${setDateMoment.format("yyyy年MM月dd日 HH時mm分ss秒　タイムゾーン：ZZZZ")}")
         if (month > 0 && day > 0 && year > 0) {
             limitSetText.text = getString(R.string.now_time2, month, day)
             if (fragLR) {
@@ -405,14 +414,16 @@ class TabMain : Fragment() {
                 )
             }
 
-            if (year - nowYear < 0) {
+            if (nowMoment > setDateMoment) {
                 many.text = getString(R.string.limit)
-            } else if ((year - nowYear == 0) && (month - nowMonthOfYear == 0) && (day - nowDayOfMonth == 0)) {
-                many.text = getString(R.string.limit_days, 0)
-                many.setTextColor(resources.getColor(R.color.red))
-            } else if ((year - nowYear >= 0) && (month - nowMonthOfYear >= 0) && (day - nowDayOfMonth >= 0)) {
-                val limitMonth = month - nowMonthOfYear + ((year - nowYear) * 12)
-                val limitDay = day - nowDayOfMonth
+            } else {
+                var limitMonth = month - nowMonthOfYear + ((year - nowYear) * 12)
+                var limitDay = day - nowDayOfMonth
+                Log.d("CHECK", "$limitMonth:$limitDay")
+                if (limitDay <= 0) {
+                    limitMonth--
+                    limitDay += 30
+                }
 
                 if (limitMonth > 0) {
                     many.text = getString(R.string.limit_month_days, limitMonth, limitDay)
@@ -422,8 +433,6 @@ class TabMain : Fragment() {
                         many.setTextColor(resources.getColor(R.color.red))
                     }
                 }
-            } else {
-                many.text = getString(R.string.limit)
             }
 
         } else {
@@ -475,13 +484,13 @@ class TabMain : Fragment() {
         }
         //通知の更新
         if (sharedPreferences.getBoolean("push", false) && editFrag) {
-            if(sharedPreferences.getBoolean("setLR", false)) {
-                AlarmPush().setNotification(2, sharedPreferences,activity)//LR
-            }else{
-                if(fragLR){
-                    AlarmPush().setNotification(0, sharedPreferences,activity)//L
-                }else{
-                    AlarmPush().setNotification(1, sharedPreferences,activity)//R
+            if (sharedPreferences.getBoolean("setLR", false)) {
+                AlarmPush().setNotification(2, sharedPreferences, activity)//LR
+            } else {
+                if (fragLR) {
+                    AlarmPush().setNotification(0, sharedPreferences, activity)//L
+                } else {
+                    AlarmPush().setNotification(1, sharedPreferences, activity)//R
                 }
             }
 
