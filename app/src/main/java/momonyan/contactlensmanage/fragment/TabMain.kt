@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.tab_main.view.*
 import me.mattak.moment.Moment
+import me.mattak.moment.minus
 import momonyan.contactlensmanage.AlarmPush
 import momonyan.contactlensmanage.R
 import java.util.*
@@ -417,13 +418,9 @@ class TabMain : Fragment() {
             if (nowMoment > setDateMoment) {
                 many.text = getString(R.string.limit)
             } else {
-                var limitMonth = month - nowMonthOfYear + ((year - nowYear) * 12)
-                var limitDay = day - nowDayOfMonth
-                Log.e("CHECK1", "$limitMonth:$limitDay")
-                if (limitDay <= 0) {
-                    limitMonth--
-                    limitDay += 30
-                }
+                val limit = setDateMoment.minus(nowMoment)
+                val limitMonth = ((limit.monthsFloor) + (limit.yearsFloor * 12)).toInt()
+                val limitDay = limit.daysFloorUnit.toInt() + 1
 
                 if (limitMonth > 0) {
                     many.text = getString(R.string.limit_month_days, limitMonth, limitDay)
@@ -433,7 +430,7 @@ class TabMain : Fragment() {
                         many.setTextColor(resources.getColor(R.color.red))
                     }
                 }
-                Log.e("CHECK2","$limitDay $limitMonth")
+                Log.e("CHECK2", "$limitDay $limitMonth")
             }
 
         } else {
