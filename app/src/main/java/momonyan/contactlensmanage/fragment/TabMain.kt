@@ -419,7 +419,7 @@ class TabMain : Fragment() {
             } else {
                 var limitMonth = month - nowMonthOfYear + ((year - nowYear) * 12)
                 var limitDay = day - nowDayOfMonth
-                Log.d("CHECK", "$limitMonth:$limitDay")
+                Log.e("CHECK1", "$limitMonth:$limitDay")
                 if (limitDay <= 0) {
                     limitMonth--
                     limitDay += 30
@@ -433,6 +433,7 @@ class TabMain : Fragment() {
                         many.setTextColor(resources.getColor(R.color.red))
                     }
                 }
+                Log.e("CHECK2","$limitDay $limitMonth")
             }
 
         } else {

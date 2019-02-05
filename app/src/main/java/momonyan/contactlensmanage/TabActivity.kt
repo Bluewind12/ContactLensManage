@@ -254,10 +254,17 @@ open class TabActivity : AppCompatActivity() {
                 lSettingButton.visibility = View.GONE
                 rSettingButton.visibility = View.GONE
             }
+            var stock = 0
+            var stock2 = 0
 
-            edit.putInt("stock", layout.stockIn.text.toString().toInt())
-            edit.putInt("stock2", layout.stockIn2.text.toString().toInt())
-
+            if (layout.stockIn.text.toString() != "") {
+                edit.putInt("stock", layout.stockIn.text.toString().toInt())
+                stock = layout.stockIn.text.toString().toInt()
+            }
+            if (layout.stockIn2.text.toString() != "") {
+                edit.putInt("stock2", layout.stockIn2.text.toString().toInt())
+                stock2 = layout.stockIn2.text.toString().toInt()
+            }
             //自動更新
             edit.putString("auto_setting", layout.spinner.selectedItem.toString())
             edit.putBoolean("LRSetting", layout.toggleButton.isChecked)
@@ -279,8 +286,6 @@ open class TabActivity : AppCompatActivity() {
 
             edit.apply()
 
-            val stock = layout.stockIn.text.toString().toInt()
-            val stock2 = layout.stockIn2.text.toString().toInt()
 
             //在庫個数の表示更新
             if (!layout.toggleButton.isChecked) {
