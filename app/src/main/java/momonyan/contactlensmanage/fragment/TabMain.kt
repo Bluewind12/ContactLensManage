@@ -397,8 +397,6 @@ class TabMain : Fragment() {
         calendar.set(year, month - 1, day, 0, 0, 0)
         val nowMoment = Moment() // 現在の日時
         val setDateMoment = Moment(calendar.time, TimeZone.getDefault(), Locale.JAPAN) // 現在の日時
-        Log.d("TEST_TAG", "${nowMoment.format("yyyy年MM月dd日 HH時mm分ss秒　タイムゾーン：ZZZZ")}")
-        Log.d("TEST_TAG", "${setDateMoment.format("yyyy年MM月dd日 HH時mm分ss秒　タイムゾーン：ZZZZ")}")
         if (month > 0 && day > 0 && year > 0) {
             limitSetText.text = getString(R.string.now_time2, month, day)
             if (fragLR) {

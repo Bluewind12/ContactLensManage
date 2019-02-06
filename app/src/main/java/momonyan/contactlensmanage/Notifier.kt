@@ -10,6 +10,8 @@ import android.support.v4.app.NotificationCompat
 
 class Notifier : BroadcastReceiver() {
 
+    var vibrate = longArrayOf(0, 200, 100, 200, 100, 200)
+
     override fun onReceive(content: Context, intent: Intent) {
 
         val id = intent.getIntExtra("LR", 0)
@@ -32,12 +34,21 @@ class Notifier : BroadcastReceiver() {
             .setContentTitle("コンタクトマネージャー")
             .setContentText(message)
             .setSmallIcon(R.drawable.contact_app_icon)
-            .setVibrate(longArrayOf(0, 200, 100, 200, 100, 200))
+            .setVibrate(vibrate)
             .setAutoCancel(true)
             .setContentIntent(sender)
             .build()
 
         val manager = content.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify("Notify", id, noti)
+    }
+
+    //バイブレーション機能の使用について
+    fun setVibrateMode(setting: Boolean) {
+        if (setting) {
+            vibrate = longArrayOf(0, 200, 100, 200, 100, 200)
+        } else {
+            vibrate = longArrayOf(0, 0, 0, 0, 0, 0)
+        }
     }
 }
