@@ -58,7 +58,7 @@ class AlarmPush : AppCompatActivity() {
         val year: Int
         val month: Int
         val day: Int
-        val requestCode: Int
+        val requestCode: Int = request
 
         val notificationHour = sharedPreferences.getInt("pushHour", 0)
         val notificationMinute = sharedPreferences.getInt("pushMinute", 0)
@@ -78,10 +78,8 @@ class AlarmPush : AppCompatActivity() {
                 error("NotiError")
             }
         }
-        requestCode = request
         val triggerTime = Calendar.getInstance()
         triggerTime.set(year, month - 1, day, notificationHour, notificationMinute, requestCode)
-
         val nowTime = Calendar.getInstance()
         val diff = triggerTime.timeInMillis - nowTime.timeInMillis
         if (diff > 0) {

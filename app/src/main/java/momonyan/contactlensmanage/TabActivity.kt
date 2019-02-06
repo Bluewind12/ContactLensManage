@@ -130,8 +130,10 @@ open class TabActivity : AppCompatActivity() {
         layout.switch1.isChecked = push
         layout.switch1.setOnCheckedChangeListener { _, isChecked ->
             layout.pushTimeIn.isEnabled = isChecked
+            layout.switch2.isEnabled = isChecked
         }
 
+        //時間入力
         layout.pushTimeIn.isEnabled = push
         layout.pushTimeIn.setFocusable(false)
         layout.pushTimeIn.setOnClickListener {
@@ -155,6 +157,10 @@ open class TabActivity : AppCompatActivity() {
             )
             timepick.show()
         }
+
+        //振動機能
+        layout.switch2.isEnabled = push
+        layout.switch2.isChecked = sharedPreferences.getBoolean("Vibrate", true)
 
         //自動更新スピナーの初期位置
         when (sharedPreferences.getString("auto_setting", "not")) {
@@ -283,6 +289,7 @@ open class TabActivity : AppCompatActivity() {
             edit.putInt("pushHour", pushHour)
             edit.putInt("pushMinute", pushMinute)
             edit.putBoolean("push", layout.switch1.isChecked)
+            edit.putBoolean("Vibrate", layout.switch2.isChecked)
 
             edit.apply()
 
@@ -343,7 +350,6 @@ open class TabActivity : AppCompatActivity() {
 
     private fun deleteAlarm(requestCode: Int) {
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
         val intent = Intent(this, Notifier::class.java)
         val pendingIntent = PendingIntent.getBroadcast(applicationContext, requestCode, intent, 0)
         pendingIntent.cancel()

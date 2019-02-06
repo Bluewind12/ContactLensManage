@@ -62,6 +62,8 @@
     <string name="lr_toggle">LR切替</string>
     <string name="lr_both">LR両方</string>
 
+    <string name="vibration">通知振動</string>
+
 
     <!-- 広告IDなど -->
     <integer name="ad_id_50">931743</integer>

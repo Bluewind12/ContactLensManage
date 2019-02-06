@@ -394,7 +394,7 @@ class TabMain : Fragment() {
         many.setTextColor(resources.getColor(R.color.default_text))
 
         //カレンダーの設定
-        calendar.set(year, month - 1, day, 0, 0, 0)
+        calendar.set(year, month - 1, day + 1, 0, 0, 0)
         val nowMoment = Moment() // 現在の日時
         val setDateMoment = Moment(calendar.time, TimeZone.getDefault(), Locale.JAPAN) // 現在の日時
         if (month > 0 && day > 0 && year > 0) {
@@ -418,7 +418,7 @@ class TabMain : Fragment() {
             } else {
                 val limit = setDateMoment.minus(nowMoment)
                 val limitMonth = ((limit.monthsFloor) + (limit.yearsFloor * 12)).toInt()
-                val limitDay = limit.daysFloorUnit.toInt() + 1
+                val limitDay = limit.daysFloorUnit.toInt()
 
                 if (limitMonth > 0) {
                     many.text = getString(R.string.limit_month_days, limitMonth, limitDay)

@@ -19,6 +19,14 @@ class Notifier : BroadcastReceiver() {
         val sendIntent = Intent(content, TabActivity::class.java)
         val sender = PendingIntent.getActivity(content, 0, sendIntent, 0)
 
+        val preference = content.getSharedPreferences("Data", Context.MODE_PRIVATE)
+        val vibrateMode = preference.getBoolean("Vibrate", true)
+
+        when (vibrateMode) {
+            true -> vibrate = longArrayOf(0, 200, 100, 200, 100, 200)
+            else -> vibrate = longArrayOf(0, 0, 0, 0, 0, 0)
+        }
+
         val message: String
 
         if (id == 0) {
@@ -28,6 +36,7 @@ class Notifier : BroadcastReceiver() {
         } else {
             message = "コンタクトの交換日です！"
         }
+
         //通知オブジェクトの生成
         val noti = NotificationCompat.Builder(content)
             .setTicker("交換日です！")
@@ -41,14 +50,5 @@ class Notifier : BroadcastReceiver() {
 
         val manager = content.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         manager.notify("Notify", id, noti)
-    }
-
-    //バイブレーション機能の使用について
-    fun setVibrateMode(setting: Boolean) {
-        if (setting) {
-            vibrate = longArrayOf(0, 200, 100, 200, 100, 200)
-        } else {
-            vibrate = longArrayOf(0, 0, 0, 0, 0, 0)
-        }
     }
 }
