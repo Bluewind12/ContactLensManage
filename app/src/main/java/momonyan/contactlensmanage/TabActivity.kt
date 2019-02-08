@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -263,11 +264,12 @@ open class TabActivity : AppCompatActivity() {
             var stock = 0
             var stock2 = 0
 
-            if (layout.stockIn.text.toString() != "") {
+            //入力が正しいかの判別
+            if (layout.stockIn.text.toString().matches(Regex("[0-9]+"))) {
                 edit.putInt("stock", layout.stockIn.text.toString().toInt())
                 stock = layout.stockIn.text.toString().toInt()
             }
-            if (layout.stockIn2.text.toString() != "") {
+            if (layout.stockIn2.text.toString().matches(Regex("[0-9]+"))) {
                 edit.putInt("stock2", layout.stockIn2.text.toString().toInt())
                 stock2 = layout.stockIn2.text.toString().toInt()
             }
