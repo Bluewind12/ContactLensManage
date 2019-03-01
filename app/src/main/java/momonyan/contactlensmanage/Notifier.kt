@@ -28,13 +28,21 @@ class Notifier : BroadcastReceiver() {
         }
 
         val message: String
+        val notiferIcon: Int
 
-        if (id == 0) {
-            message = "コンタクト(L)の交換日です！"
-        } else if (id == 1) {
-            message = "コンタクト(R)の交換日です！"
-        } else {
-            message = "コンタクトの交換日です！"
+        when (id) {
+            0 -> {
+                message = "コンタクト(L)の交換日です！"
+                notiferIcon = R.drawable.l_icon
+            }
+            1 -> {
+                message = "コンタクト(R)の交換日です！"
+                notiferIcon = R.drawable.r_icon
+            }
+            else -> {
+                message = "コンタクトの交換日です！"
+                notiferIcon = R.drawable.lr_icon
+            }
         }
 
         //通知オブジェクトの生成
@@ -42,7 +50,7 @@ class Notifier : BroadcastReceiver() {
             .setTicker("交換日です！")
             .setContentTitle("コンタクトマネージャー")
             .setContentText(message)
-            .setSmallIcon(R.drawable.contact_app_icon)
+            .setSmallIcon(notiferIcon)
             .setVibrate(vibrate)
             .setAutoCancel(true)
             .setContentIntent(sender)

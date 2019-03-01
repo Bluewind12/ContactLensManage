@@ -480,7 +480,7 @@ class TabMain : Fragment() {
         }
         //通知の更新
         if (sharedPreferences.getBoolean("push", false) && editFrag) {
-            if (sharedPreferences.getBoolean("setLR", false)) {
+            if (sharedPreferences.getBoolean("setLR", true)) {
                 AlarmPush().setNotification(2, sharedPreferences, activity)//LR
             } else {
                 if (fragLR) {
