@@ -34,10 +34,6 @@ class TabMore : Fragment() {
         contactHolder2.type = sharedPreferences.getString("type2", getString(R.string.not_setting))
         contactHolder2.otherMemos = sharedPreferences.getString("other2", getString(R.string.not_setting))
 
-        //空白を変更する
-        checkHolder(contactHolder)
-        checkHolder(contactHolder2)
-
         //表示
         view.makerText.text = contactHolder.maker
         view.lensText.text = contactHolder.lens
@@ -59,18 +55,4 @@ class TabMore : Fragment() {
         return view
     }
 
-    private fun checkHolder(contactHolder: ContactDataHolder) {
-        if (contactHolder.maker == "") {
-            contactHolder.maker = getString(R.string.not_setting)
-        }
-        if (contactHolder.lens == "") {
-            contactHolder.lens = getString(R.string.not_setting)
-        }
-        if (contactHolder.type == "") {
-            contactHolder.type = getString(R.string.not_setting)
-        }
-        if (contactHolder.otherMemos == "") {
-            contactHolder.otherMemos = getString(R.string.not_setting)
-        }
-    }
 }
