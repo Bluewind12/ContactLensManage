@@ -2,10 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="プライバシーポリシー" android:id="@+id/menu2" android:icon="@drawable/web_icon"
-          app:showAsAction="ifRoom"/>
+    <item android:title="@string/privacy" android:id="@+id/menu2"
+    />
 
-    <item android:title="アンケート箱" android:id="@+id/menu3" android:icon="@drawable/ans_icon"
-          app:showAsAction="ifRoom"/>
+    <item android:title="@string/impressionWeb" android:id="@+id/menu3"
+    />
 
 </menu>

@@ -79,4 +79,6 @@
     <!-- URL -->
     <string name="privacy_policy">https://www.gensounosakura.work/posts/5501843</string>
     <string name="enquete_url">https://goo.gl/forms/5nkpgZ3ykued2lCe2</string>
+    <string name="privacy">プライバシーポリシーへ</string>
+    <string name="impressionWeb">ご意見、感想はこちらへ</string>
 </resources>
