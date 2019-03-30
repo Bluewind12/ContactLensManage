@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import jp.co.runners.rateorfeedback.RateOrFeedback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
@@ -73,6 +74,31 @@ open class TabActivity : AppCompatActivity() {
                 settingDialogCreate()
             }
         }
+
+        //レビュー
+        RateOrFeedback(this)
+            // レビュー用ストアURL
+            .setPlayStoreUrl("https://play.google.com/store/apps/details?id=momonyan.contactlensmanage")
+            // 改善点・要望の送信先メールアドレス
+            .setFeedbackEmail("gensounosakurakikimimi@gmail.com")
+            // 一度、評価するか改善点を送信するを選択した場合、それ以降はダイアログが表示されません。
+            // この値をインクリメントすることで再度ダイアログが表示されるようになります。
+            .setReviewRequestId(0)
+            // 前回ダイアログを表示してから次にダイアログを表示してよいタイミングまでの期間です。
+            .setIntervalFromPreviousShowing(60 * 60 * 24 * 7)//7日
+            // アプリをインストールしてから、ここで指定された期間はダイアログを表示しません。
+            .setNotShowTermSecondsFromInstall(60 * 60 * 1)//1時間
+            .setAskLikeAppDialogMessage("このアプリはどうですか?")
+            .setAskLikeAppDialogPositiveTitle("使いやすい！")
+            .setAskLikeAppDialogNegativeTitle("そうでもない")
+            .setRequestReviewDialogMessage("それはよかった！\nもしよければストアでレビューして頂けないでしょうか？")
+            .setRequestReviewDialogPositiveTitle("レビューする!")
+            .setRequestReviewDialogNegativeTitle("今はしない")
+            .setRequestFeedbackDialogMessage("改善点や要望を送信しますか？")
+            .setRequestFeedbackDialogPositiveTitle("送信する!")
+            .setRequestFeedbackDialogNegativeTitle("今はしない")
+            // 条件次第でダイアログを表示する
+            .showIfNeeds()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
