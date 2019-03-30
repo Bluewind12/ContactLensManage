@@ -94,19 +94,6 @@ open class TabActivity : AppCompatActivity() {
                     .setNegativeButton("いいえ", null)
                     .show()
             }
-            R.id.menu3 -> {
-                AlertDialog.Builder(this)
-                    .setTitle("Webページを開きます")
-                    .setMessage("「意見・感想・報告について」\nのページを開いてもよろしいですか？")
-                    .setPositiveButton("はい") { _, _ ->
-                        val uri = Uri.parse(getString(R.string.enquete_url))
-                        val intent = Intent(Intent.ACTION_VIEW, uri)
-                        startActivity(intent)
-                    }
-                    .setNegativeButton("いいえ", null)
-                    .show()
-                return true
-            }
         }
         return true
     }
