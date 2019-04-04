@@ -79,4 +79,17 @@
     <!-- URL -->
     <string name="privacy_policy">https://www.gensounosakura.work/posts/5501843</string>
     <string name="privacy">プライバシーポリシーへ</string>
+    <string name="rate_dialog_title">初期タイトル</string>
+
+    <!-- レビュー関連 -->
+    <string name="rate_dialog_message">初期メッセージ</string>
+    <string name="rate_dialog_ok">初期OKボタン</string>
+    <string name="rate_dialog_store_message">ストア誘導メッセージ</string>
+    <string name="rate_dialog_store_ok">ストア誘導OK</string>
+    <string name="rate_dialog_store_no">ストア誘導NO</string>
+    <string name="rate_dialog_no">初期NO</string>
+    <string name="rate_dialog_mail_message">メールメッセージ</string>
+    <string name="rate_dialog_mail_ok">メールOK</string>
+    <string name="rate_dialog_mail_no">メールNO</string>
+
 </resources>

@@ -379,7 +379,7 @@ open class TabActivity : AppCompatActivity() {
                             intent.action = Intent.ACTION_SENDTO
                             intent.type = "text/plain"
                             intent.data = Uri.parse("mailto:gensounosakurakikimimi@gmail.com")
-                            intent.putExtra(Intent.EXTRA_SUBJECT, "問い合わせ：麻雀ツール")
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "問い合わせ：コンタクトレンズマネージャ")
                             intent.putExtra(Intent.EXTRA_TEXT, "")
                             startActivity(Intent.createChooser(intent, null))
                             sharedPreferences.edit().putInt("ViewNum", -5).apply()
