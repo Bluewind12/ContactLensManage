@@ -17,7 +17,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import jp.co.runners.rateorfeedback.RateOrFeedback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
@@ -75,30 +74,7 @@ open class TabActivity : AppCompatActivity() {
             }
         }
 
-        //レビュー
-        RateOrFeedback(this)
-            // レビュー用ストアURL
-            .setPlayStoreUrl("https://play.google.com/store/apps/details?id=momonyan.contactlensmanage")
-            // 改善点・要望の送信先メールアドレス
-            .setFeedbackEmail("gensounosakurakikimimi@gmail.com")
-            // 一度、評価するか改善点を送信するを選択した場合、それ以降はダイアログが表示されません。
-            // この値をインクリメントすることで再度ダイアログが表示されるようになります。
-            .setReviewRequestId(0)
-            // 前回ダイアログを表示してから次にダイアログを表示してよいタイミングまでの期間です。
-            .setIntervalFromPreviousShowing(60 * 60 * 24 * 7)//7日
-            // アプリをインストールしてから、ここで指定された期間はダイアログを表示しません。
-            .setNotShowTermSecondsFromInstall(60 * 60 * 1)//1時間
-            .setAskLikeAppDialogMessage("このアプリはどうですか?")
-            .setAskLikeAppDialogPositiveTitle("使いやすい！")
-            .setAskLikeAppDialogNegativeTitle("そうでもない")
-            .setRequestReviewDialogMessage("それはよかった！\nもしよければストアでレビューして頂けないでしょうか？")
-            .setRequestReviewDialogPositiveTitle("レビューする!")
-            .setRequestReviewDialogNegativeTitle("今はしない")
-            .setRequestFeedbackDialogMessage("改善点や要望を送信しますか？")
-            .setRequestFeedbackDialogPositiveTitle("送信する!")
-            .setRequestFeedbackDialogNegativeTitle("今はしない")
-            // 条件次第でダイアログを表示する
-            .showIfNeeds()
+        viewAlertDialog(5)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -369,5 +345,56 @@ open class TabActivity : AppCompatActivity() {
         pendingIntent.cancel()
         alarmManager.cancel(pendingIntent)
     }
+
+    private fun viewAlertDialog(viewLimit: Int) {
+        var viewNum = sharedPreferences.getInt("ViewNum", 0)
+        if (viewNum == viewLimit) {
+            sharedPreferences.edit().putInt("ViewNum", -15).apply()
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.rate_dialog_title)) //タイトル
+                .setMessage(getString(R.string.rate_dialog_message)) //内容
+                .setPositiveButton(getString(R.string.rate_dialog_ok)) { _, _ ->
+                    //レビューページに飛ばす用のアラートダイアログ
+                    AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.rate_dialog_title))
+                        .setMessage(getString(R.string.rate_dialog_store_message))
+                        .setPositiveButton(getString(R.string.rate_dialog_store_ok)) { _, _ ->
+                            val uri = Uri.parse("market://details?id=momonyan.mahjongg_tools")
+                            val intent = Intent(Intent.ACTION_VIEW, uri)
+                            startActivity(intent)
+                            sharedPreferences.edit().putInt("ViewNum", 10).apply()
+                        }
+                        .setNegativeButton(getString(R.string.rate_dialog_store_no)) { _, _ ->
+                            sharedPreferences.edit().putInt("ViewNum", 0).apply()
+                        }
+                        .show()
+                }
+                .setNegativeButton(getString(R.string.rate_dialog_no)) { _, _ ->
+                    //問い合わせに飛ばすためのアラートダイアログ
+                    AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.rate_dialog_title))
+                        .setMessage(getString(R.string.rate_dialog_mail_message))
+                        .setPositiveButton(getString(R.string.rate_dialog_mail_ok)) { _, _ ->
+                            val intent = Intent()
+                            intent.action = Intent.ACTION_SENDTO
+                            intent.type = "text/plain"
+                            intent.data = Uri.parse("mailto:gensounosakurakikimimi@gmail.com")
+                            intent.putExtra(Intent.EXTRA_SUBJECT, "問い合わせ：麻雀ツール")
+                            intent.putExtra(Intent.EXTRA_TEXT, "")
+                            startActivity(Intent.createChooser(intent, null))
+                            sharedPreferences.edit().putInt("ViewNum", -5).apply()
+                        }
+                        .setNegativeButton(getString(R.string.rate_dialog_mail_no)) { _, _ ->
+                            sharedPreferences.edit().putInt("ViewNum", 0).apply()
+                        }
+                        .show()
+                }
+                .show()
+        } else {
+            viewNum++
+            sharedPreferences.edit().putInt("ViewNum", viewNum).apply()
+        }
+    }
+
 
 }
