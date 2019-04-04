@@ -359,7 +359,7 @@ open class TabActivity : AppCompatActivity() {
                         .setTitle(getString(R.string.rate_dialog_title))
                         .setMessage(getString(R.string.rate_dialog_store_message))
                         .setPositiveButton(getString(R.string.rate_dialog_store_ok)) { _, _ ->
-                            val uri = Uri.parse("market://details?id=momonyan.mahjongg_tools")
+                            val uri = Uri.parse("market://details?id=momonyan.contactlensmanage")
                             val intent = Intent(Intent.ACTION_VIEW, uri)
                             startActivity(intent)
                             sharedPreferences.edit().putInt("ViewNum", 10).apply()
