@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import jp.co.runners.rateorfeedback.RateOrFeedback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
@@ -58,6 +59,7 @@ open class TabActivity : AppCompatActivity() {
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 NendAdInterstitial.showAd(this@TabActivity, tabChangeAd)
+                viewAlertDialog()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -74,7 +76,6 @@ open class TabActivity : AppCompatActivity() {
             }
         }
 
-        viewAlertDialog(5)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -346,54 +347,21 @@ open class TabActivity : AppCompatActivity() {
         alarmManager.cancel(pendingIntent)
     }
 
-    private fun viewAlertDialog(viewLimit: Int) {
-        var viewNum = sharedPreferences.getInt("ViewNum", 0)
-        if (viewNum == viewLimit) {
-            sharedPreferences.edit().putInt("ViewNum", -15).apply()
-            AlertDialog.Builder(this)
-                .setTitle(getString(R.string.rate_dialog_title)) //タイトル
-                .setMessage(getString(R.string.rate_dialog_message)) //内容
-                .setPositiveButton(getString(R.string.rate_dialog_ok)) { _, _ ->
-                    //レビューページに飛ばす用のアラートダイアログ
-                    AlertDialog.Builder(this)
-                        .setTitle(getString(R.string.rate_dialog_title))
-                        .setMessage(getString(R.string.rate_dialog_store_message))
-                        .setPositiveButton(getString(R.string.rate_dialog_store_ok)) { _, _ ->
-                            val uri = Uri.parse("market://details?id=momonyan.contactlensmanage")
-                            val intent = Intent(Intent.ACTION_VIEW, uri)
-                            startActivity(intent)
-                            sharedPreferences.edit().putInt("ViewNum", 10).apply()
-                        }
-                        .setNegativeButton(getString(R.string.rate_dialog_store_no)) { _, _ ->
-                            sharedPreferences.edit().putInt("ViewNum", 0).apply()
-                        }
-                        .show()
-                }
-                .setNegativeButton(getString(R.string.rate_dialog_no)) { _, _ ->
-                    //問い合わせに飛ばすためのアラートダイアログ
-                    AlertDialog.Builder(this)
-                        .setTitle(getString(R.string.rate_dialog_title))
-                        .setMessage(getString(R.string.rate_dialog_mail_message))
-                        .setPositiveButton(getString(R.string.rate_dialog_mail_ok)) { _, _ ->
-                            val intent = Intent()
-                            intent.action = Intent.ACTION_SENDTO
-                            intent.type = "text/plain"
-                            intent.data = Uri.parse("mailto:gensounosakurakikimimi@gmail.com")
-                            intent.putExtra(Intent.EXTRA_SUBJECT, "問い合わせ：コンタクトレンズマネージャ")
-                            intent.putExtra(Intent.EXTRA_TEXT, "")
-                            startActivity(Intent.createChooser(intent, null))
-                            sharedPreferences.edit().putInt("ViewNum", -5).apply()
-                        }
-                        .setNegativeButton(getString(R.string.rate_dialog_mail_no)) { _, _ ->
-                            sharedPreferences.edit().putInt("ViewNum", 0).apply()
-                        }
-                        .show()
-                }
-                .show()
-        } else {
-            viewNum++
-            sharedPreferences.edit().putInt("ViewNum", viewNum).apply()
-        }
+    private fun viewAlertDialog() {
+        RateOrFeedback(this)
+            // レビュー用ストアURL
+            .setPlayStoreUrl(getString(R.string.reviewUrl))
+            // 改善点・要望の送信先メールアドレス
+            .setFeedbackEmail(getString(R.string.reviewMail))
+            // 一度、評価するか改善点を送信するを選択した場合、それ以降はダイアログが表示されません。
+            // この値をインクリメントすることで再度ダイアログが表示されるようになります。
+            .setReviewRequestId(0)
+            // 前回ダイアログを表示してから次にダイアログを表示してよいタイミングまでの期間です。
+            .setIntervalFromPreviousShowing(60 * 60 * 3)//3時間
+            // アプリをインストールしてから、ここで指定された期間はダイアログを表示しません。
+            .setNotShowTermSecondsFromInstall(60 * 60)//1時間
+            .showIfNeeds()
+
     }
 
 
