@@ -6,7 +6,9 @@
         android:layout_height="match_parent">
 
     <ScrollView android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent">
 
         <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
@@ -35,7 +37,7 @@
                         android:id="@+id/pushTimeIn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="24sp"/>
+                        android:textSize="24sp" android:singleLine="true"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
