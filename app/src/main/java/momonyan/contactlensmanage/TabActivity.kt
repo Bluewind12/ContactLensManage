@@ -85,6 +85,7 @@ open class TabActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.tabSetting -> settingDialogCreate()
             R.id.menu2 -> {
                 AlertDialog.Builder(this)
                     .setTitle("Webページを開きます")

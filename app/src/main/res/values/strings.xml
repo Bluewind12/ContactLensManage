@@ -82,5 +82,6 @@
 
     <string name="reviewUrl">market://details?id=momonyan</string>
     <string name="reviewMail">gensounosakurakikimimi@gmail.com</string>
+    <string name="setting">設定</string>
 
 </resources>
