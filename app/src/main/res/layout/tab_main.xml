@@ -15,7 +15,8 @@
                 android:id="@+id/setTimeText"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp" android:textSize="20sp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" android:textColor="@android:color/white"
+                android:background="@drawable/text_background"/>
         <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/limitDay"
@@ -32,30 +33,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/minuteTimeText"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="24dp" android:textSize="24sp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:layout_marginStart="8dp" android:textSize="24sp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="@+id/manyText"
+                        app:layout_constraintStart_toEndOf="@+id/imageView"/>
                 <TextView
                         android:text="@string/limit_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/manyText"
-                        app:layout_constraintStart_toStartOf="@+id/minuteTimeText"
                         android:textSize="36sp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeText" android:layout_marginStart="24dp"
+                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeText"
                         android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.278"/>
+                        app:layout_constraintVertical_bias="0.278" android:layout_marginEnd="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"/>
                 <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp" app:srcCompat="@drawable/l_icon"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/imageView"
-                        app:layout_constraintStart_toEndOf="@+id/manyText" app:layout_constraintVertical_bias="1.0"
-                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.0"
-                        android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
+                        app:layout_constraintVertical_bias="1.0"
+                        android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="16dp" android:adjustViewBounds="true"
+                        app:layout_constraintStart_toStartOf="parent"/>
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
@@ -68,35 +70,39 @@
                 app:cardUseCompatPadding="true" android:layout_marginTop="8dp">
 
             <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
-                                                         android:layout_height="wrap_content">
+                                                         android:layout_height="wrap_content"
+                                                         tools:layout_editor_absoluteY="4dp"
+                                                         tools:layout_editor_absoluteX="3dp">
                 <TextView
-                        android:text="@string/limit_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/minuteTimeTextR"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginStart="24dp" android:textSize="24sp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:textSize="24sp" android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/limit_time" app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="@+id/manyTextR"/>
                 <TextView
                         android:text="@string/limit_days"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/manyTextR"
-                        app:layout_constraintStart_toStartOf="@+id/minuteTimeTextR"
                         android:textSize="36sp"
                         android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeTextR" android:layout_marginStart="24dp"
-                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"/>
+                        app:layout_constraintTop_toBottomOf="@+id/minuteTimeTextR"
+                        app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+                />
                 <ImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp" app:srcCompat="@drawable/r_icon"
                         android:id="@+id/imageView2"
                         android:layout_marginBottom="16dp"
                         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="16dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/manyTextR"
-                        android:layout_marginStart="16dp" app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="16dp"/>
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginStart="24dp"
+                        android:adjustViewBounds="true"/>
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v7.widget.CardView>
@@ -148,7 +154,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="24dp"
                 android:id="@+id/setTimeTextR" app:layout_constraintTop_toBottomOf="@+id/limitDay"
-                android:layout_marginTop="16dp" android:textSize="20sp"/>
+                android:layout_marginTop="16dp" android:textSize="20sp" android:background="@drawable/text_background"
+                android:textColor="@android:color/white"/>
         <Button
                 android:text="@string/l_set"
                 android:layout_width="wrap_content"
