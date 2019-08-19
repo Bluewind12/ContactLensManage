@@ -39,4 +39,5 @@ dependencies {
     implementation 'me.mattak:moment:0.0.4'
 
     implementation 'jp.co.runners:rateorfeedback:0.0.3'
+    implementation 'com.google.android.gms:play-services-ads:18.1.1'
 }

@@ -4,8 +4,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        xmlns:nendsdk="http://schemas.android.com/apk/res-auto"
         android:layout_height="match_parent"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
 >
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -200,17 +200,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginBottom="16dp"/>
 
-        <net.nend.android.NendAdView
+        <com.google.android.gms.ads.AdView
                 android:id="@+id/nend100"
                 android:layout_width="320dp"
                 android:layout_height="100dp"
+                ads:adSize="LARGE_BANNER"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardView2_2"
                 android:layout_marginBottom="16dp" android:layout_marginTop="16dp"
-                nendsdk:NendApiKey="@string/ad_apk_100"
-                nendsdk:NendSpotId="@integer/ad_id_100"/>
+                ads:adUnitId="@string/ad_banner_100"
+        />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
