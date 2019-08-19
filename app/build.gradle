@@ -40,4 +40,8 @@ dependencies {
 
     implementation 'jp.co.runners:rateorfeedback:0.0.3'
     implementation 'com.google.android.gms:play-services-ads:18.1.1'
+
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+    implementation 'com.google.firebase:firebase-ads:18.1.1'
 }
+apply plugin: 'com.google.gms.google-services'  // Google Play services Gradle plugin

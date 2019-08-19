@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "725122218019",
+    "firebase_url": "https://contactlensapp-d39a7.firebaseio.com",
+    "project_id": "contactlensapp-d39a7",
+    "storage_bucket": "contactlensapp-d39a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725122218019:android:922376e7fdea5b8c",
+        "android_client_info": {
+          "package_name": "momonyan.contactlensmanage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725122218019-cppv12pln8fin4694068k5k0l6jtlpce.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEZBJLMdve4VFsQiw4kOXPpWTIo4FUN7E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725122218019-cppv12pln8fin4694068k5k0l6jtlpce.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
