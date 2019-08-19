@@ -12,6 +12,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-6499097800180510~5042437953"/>
         <activity android:name=".TabActivity"
                   android:screenOrientation="portrait"
                   android:label="@string/view_title">

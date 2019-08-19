@@ -5,12 +5,13 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.tab_main.view.*
 import me.mattak.moment.Moment
 import me.mattak.moment.minus
@@ -35,6 +36,9 @@ class TabMain : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         v = inflater.inflate(R.layout.tab_main, container, false)
         sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
+
+        val adRequest = AdRequest.Builder().build()
+        v.adMain.loadAd(adRequest)
 
         //初期セット
         fragLR = true

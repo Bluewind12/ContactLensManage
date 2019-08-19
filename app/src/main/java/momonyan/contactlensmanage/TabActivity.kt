@@ -9,46 +9,52 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import jp.co.runners.rateorfeedback.RateOrFeedback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
 import kotlinx.android.synthetic.main.tab_main.*
 import kotlinx.android.synthetic.main.tab_more.*
-import net.nend.android.NendAdInterstitial
 import java.util.*
 
 
-open class TabActivity : AppCompatActivity() {
+class TabActivity : AppCompatActivity() {
 
     private var mSectionsPagerAdapter: TabAdapter? = null
     private lateinit var sharedPreferences: SharedPreferences
     private lateinit var edit: SharedPreferences.Editor
     private var settingViewFrag = true
 
-    private var settingChangeAd: Int = 0
-    private var tabChangeAd: Int = 0
+    private val tabAd = InterstitialAd(this)
+    private val settingAd = InterstitialAd(this)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        settingChangeAd = resources.getInteger(R.integer.ad_id_pop_setting)
-        tabChangeAd = resources.getInteger(R.integer.ad_id_pop_tab)
+
+        //AD
+        MobileAds.initialize(this, "ca-app-pub-6499097800180510~5042437953")
+        tabAd.adUnitId = getString(R.string.ad_tab_pop)
+        tabAd.loadAd(AdRequest.Builder().build())
+
+        settingAd.adUnitId = getString(R.string.ad_setting_pop)
+        settingAd.loadAd(AdRequest.Builder().build())
+
+
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
         notificationManager.cancelAll()
-
-        //広告設定
-        NendAdInterstitial.loadAd(this, getString(R.string.ad_apk_pop_setting), settingChangeAd)
-        NendAdInterstitial.loadAd(this, getString(R.string.ad_apk_pop_tab), tabChangeAd)
 
         sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE)
         mSectionsPagerAdapter = TabAdapter(supportFragmentManager)
@@ -58,7 +64,9 @@ open class TabActivity : AppCompatActivity() {
 
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                NendAdInterstitial.showAd(this@TabActivity, tabChangeAd)
+                if (tabAd.isLoaded) {
+                    tabAd.show()
+                }
                 viewAlertDialog()
             }
 
@@ -126,7 +134,7 @@ open class TabActivity : AppCompatActivity() {
 
         //時間入力
         layout.pushTimeIn.isEnabled = push
-        layout.pushTimeIn.setFocusable(false)
+        layout.pushTimeIn.isFocusable = false
         layout.pushTimeIn.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -319,17 +327,23 @@ open class TabActivity : AppCompatActivity() {
                 }
             }
             settingViewFrag = true
-            NendAdInterstitial.showAd(this, settingChangeAd)
+            if (settingAd.isLoaded) {
+                settingAd.show()
+            }
         }
 
         dlg.setNegativeButton("キャンセル") { _, _ ->
             settingViewFrag = true
-            NendAdInterstitial.showAd(this, settingChangeAd)
+            if (settingAd.isLoaded) {
+                settingAd.show()
+            }
         }
 
         dlg.setOnCancelListener {
             settingViewFrag = true
-            NendAdInterstitial.showAd(this, settingChangeAd)
+            if (settingAd.isLoaded) {
+                settingAd.show()
+            }
         }
 
         // AlertDialogを表示する

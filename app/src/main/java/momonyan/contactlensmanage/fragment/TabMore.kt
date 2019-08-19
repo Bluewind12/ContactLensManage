@@ -3,10 +3,11 @@ package momonyan.contactlensmanage.fragment
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.ads.AdRequest
 import kotlinx.android.synthetic.main.tab_more.view.*
 import momonyan.contactlensmanage.ContactDataHolder
 import momonyan.contactlensmanage.R
@@ -19,6 +20,8 @@ class TabMore : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.tab_more, container, false)
 
+        val adRequest = AdRequest.Builder().build()
+        view.adMore.loadAd(adRequest)
         sharedPreferences = activity!!.getSharedPreferences("Data", Context.MODE_PRIVATE)
         //Holder
         val contactHolder = ContactDataHolder
