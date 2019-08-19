@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ad_main"></string>
+    <string name="ad_fav_list"></string>
+    <string name="ad_detail"></string>
+    <string name="ad_detail_search"></string>
+    <string name="ad_profile"></string>
+    <string name="ad_in_idea"></string>
+    <string name="ad_in_comment"></string>
+
+    <!--テスト用-->
+    <!--<string name="ad_main">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_fav_list">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_detail">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_detail_search">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_profile">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_in_idea">ca-app-pub-3940256099942544/6300978111</string>-->
+    <!--<string name="ad_in_comment">ca-app-pub-3940256099942544/6300978111</string>-->
+</resources>
