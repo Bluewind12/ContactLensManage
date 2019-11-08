@@ -14,14 +14,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <View android:layout_width="0dp" android:layout_height="5dp"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
-                  android:alpha="0.5" android:background="@color/skyBlue" android:id="@+id/view5"
-                  app:layout_constraintHorizontal_bias="0.0"
-                  android:layout_marginTop="16dp" app:layout_constraintTop_toBottomOf="@+id/switch2"/>
+            <View
+                    android:id="@+id/view5"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0.5"
+                    android:background="@color/skyBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
+
+            <View
+                    android:id="@+id/view6"
+                    android:layout_width="0dp"
+                    android:layout_height="5dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:alpha="0.5"
+                    android:background="@color/skyBlue"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/switch2" />
 
             <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/pushTimeLayout"
@@ -332,6 +352,35 @@
                     android:id="@+id/switch2" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toBottomOf="@+id/pushTimeLayout"
                     app:layout_constraintStart_toStartOf="@+id/pushTimeLayout" android:layout_marginStart="8dp"/>
+
+            <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Webショートカット登録"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/textInputLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView7">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/shortcutUrlTextInputEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="URL" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
