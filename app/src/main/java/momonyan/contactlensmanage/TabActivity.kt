@@ -9,17 +9,17 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import com.google.android.material.tabs.TabLayout
 import jp.co.runners.rateorfeedback.RateOrFeedback
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.setting_layout.view.*
@@ -106,6 +106,11 @@ class TabActivity : AppCompatActivity() {
                     .setNegativeButton("いいえ", null)
                     .show()
             }
+            R.id.menuShortCutUrl -> {
+                val uri = Uri.parse(sharedPreferences.getString("shortCutUrl", "http://"))
+                val urlIntent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(urlIntent)
+            }
         }
         return true
     }
@@ -119,6 +124,12 @@ class TabActivity : AppCompatActivity() {
         dlg.setView(layout)
         layout.stockIn.setText(sharedPreferences.getInt("stock", 0).toString(), TextView.BufferType.NORMAL)
         layout.stockIn2.setText(sharedPreferences.getInt("stock2", 0).toString(), TextView.BufferType.NORMAL)
+        layout.shortcutUrlTextInputEditText.setText(
+            sharedPreferences.getString(
+                "shortCutUrl",
+                "http://"
+            ), TextView.BufferType.NORMAL
+        )
 
         //通知時刻設定など
         var pushHour = sharedPreferences.getInt("pushHour", 0)
@@ -290,6 +301,9 @@ class TabActivity : AppCompatActivity() {
             edit.putInt("pushMinute", pushMinute)
             edit.putBoolean("push", layout.switch1.isChecked)
             edit.putBoolean("Vibrate", layout.switch2.isChecked)
+
+            //URL
+            edit.putString("shortCutUrl", layout.shortcutUrlTextInputEditText.text.toString())
 
             edit.apply()
 
