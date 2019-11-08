@@ -71,5 +71,6 @@
     <string name="reviewUrl">market://details?id=momonyan</string>
     <string name="reviewMail">gensounosakurakikimimi@gmail.com</string>
     <string name="setting">設定</string>
+    <string name="short_cut_url_page_jump">ショートカットページへ</string>
 
 </resources>

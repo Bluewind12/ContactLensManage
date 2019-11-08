@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
 >
+    <item
+            android:id="@+id/menuShortCutUrl"
+            android:icon="@drawable/icon_short_cut"
+            android:title="@string/short_cut_url_page_jump"
+            app:showAsAction="ifRoom" />
     <item android:title="@string/setting" android:id="@+id/tabSetting"
           android:icon="@drawable/gear_w"
           app:showAsAction="ifRoom"/>
